@@ -23,43 +23,32 @@ export const App: React.FC = () => {
       {/* 2. STICKY INSTITUTIONAL HEADER */}
       <Header />
 
-      {/* Main event content: each chapter carries its own atmosphere. */}
+      {/* The existing content is preserved inside four desktop cinematic chapters. */}
       <main className="relative z-10 flex-1 w-full flex flex-col">
-        {/* HERO SECTION */}
-        <Hero />
+        <div className="cinematic-group cinematic-group--opening" data-cinematic-group="opening">
+          <div className="cinematic-scene cinematic-scene--hero" data-cinematic-scene><Hero /></div>
+          <div className="cinematic-scene cinematic-scene--leaders" data-cinematic-scene><LeadershipShowcase /></div>
+        </div>
 
-        {/* SWAMIJI LEADERSHIP SHOWCASE */}
-        <LeadershipShowcase />
+        <div className="cinematic-group cinematic-group--challenge" data-cinematic-group="challenge">
+          <div className="cinematic-scene" data-cinematic-scene><About /></div>
+          <div className="cinematic-scene" data-cinematic-scene><WhyRelay /></div>
+          <div className="cinematic-scene" data-cinematic-scene><EventCountdownSection /></div>
+          <div className="cinematic-scene" data-cinematic-scene><Prizes /></div>
+        </div>
 
-        {/* 01 ABOUT / COMPETITION OVERVIEW */}
-        <About />
+        <div className="cinematic-group cinematic-group--competition" data-cinematic-group="competition">
+          <div className="cinematic-scene" data-cinematic-scene><Rounds /></div>
+          <div className="cinematic-scene" data-cinematic-scene><Rules /></div>
+        </div>
 
-        {/* DEDICATED EVENT COUNTDOWN SECTION */}
-        <EventCountdownSection />
-
-        {/* 02 PRIZES / BOUNTY POOL */}
-        <Prizes />
-
-        {/* 03 ROUNDS / EXECUTION PIPELINE */}
-        <Rounds />
-
-        {/* 04 RULES / EVENT PROTOCOL */}
-        <Rules />
-
-        {/* 05 WHY CODE RELAY? / ARCHITECTURAL VALUE */}
-        <WhyRelay />
-
-        {/* 06 FAQ / KNOWLEDGE BASE */}
-        <FAQ />
-
-        {/* 07 CONTACT / EVENT TEAM */}
-        <Contact />
-
-        {/* 08 VENUE / CAMPUS DATUM POINT */}
-        <Venue />
+        <div className="cinematic-closing" data-cinematic-closing>
+          <FAQ />
+          <Contact />
+          <Venue />
+        </div>
       </main>
 
-      {/* 4. MINIMAL FOOTER WITH BACK TO TOP */}
       <Footer />
     </div>
   );

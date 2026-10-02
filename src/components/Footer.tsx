@@ -10,10 +10,7 @@ export const Footer: React.FC = () => {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    const targetElement = document.querySelector(href);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: 'smooth' });
-    }
+    window.dispatchEvent(new CustomEvent('cinematic:navigate', { detail: href }));
   };
 
   return (

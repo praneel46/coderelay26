@@ -111,7 +111,7 @@ export const Rounds: React.FC = () => {
           </motion.div>
 
           {/* Sequential Round Nodes & Content Cards */}
-          <div className="space-y-8 sm:space-y-12">
+          <div className="rounds-cinematic-track space-y-8 sm:space-y-12">
             {ROUNDS.map((round, index) => (
               <motion.div
                 key={round.number}
@@ -123,7 +123,7 @@ export const Rounds: React.FC = () => {
                   delay: index * 0.1,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="group relative flex items-start"
+                className="round-cinematic-item group relative flex items-start"
               >
                 {/* Aligned Node on the Rail */}
                 <div className="absolute -left-[24px] sm:-left-[32px] md:-left-[36px] top-1.5 flex items-center justify-center">

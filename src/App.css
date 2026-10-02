@@ -296,3 +296,63 @@
 @media (prefers-reduced-motion: reduce) {
   .site-menu-trigger, .site-menu-nav button, .site-menu-nav svg { transition: none; }
 }
+
+/* ScrollTrigger chapters: each scene takes the viewport, then hands off to the next. */
+.cinematic-group { position: relative; width: 100%; background: #0b0d15; }
+.cinematic-scene { position: relative; width: 100%; }
+.cinematic-group--opening { background: #0b0d15; }
+.cinematic-group--challenge { background: #10101d; }
+.cinematic-group--competition { background: #0d0d16; }
+
+@media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+  .cinematic-group { height: 100svh; overflow: hidden; isolation: isolate; }
+  .cinematic-scene {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: grid;
+    align-items: stretch;
+    overflow: hidden;
+    will-change: transform, opacity;
+    background: inherit;
+  }
+  .cinematic-scene > section { width: 100%; min-height: 100%; max-height: 100%; overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(209,255,52,.35) transparent; }
+  .cinematic-scene--leaders { z-index: 2; background: linear-gradient(135deg, #11101d, #161128); }
+  .cinematic-group--challenge .cinematic-scene:nth-child(2) { background: linear-gradient(120deg, #0d1119, #16122a); }
+  .cinematic-group--challenge .cinematic-scene:nth-child(3) { background: #0b0e15; }
+  .cinematic-group--challenge .cinematic-scene:nth-child(4) { background: linear-gradient(135deg, #151022, #0d1119); }
+  .cinematic-group--competition .cinematic-scene:nth-child(2) { background: linear-gradient(145deg, #101221, #171224); }
+
+  .cinematic-group .event-hero { min-height: 100%; }
+  .cinematic-group .event-hero__inner { padding-top: clamp(38px, 5vh, 68px); padding-bottom: clamp(34px, 5vh, 62px); }
+  .cinematic-group .hero-content { margin-top: clamp(24px, 5vh, 74px); }
+  .cinematic-group .leadership-section { min-height: 100%; display: flex; align-items: center; }
+  .cinematic-group .leadership-section__inner { width: min(100% - 96px, 1180px); }
+
+  .cinematic-group--challenge .cinematic-scene > section,
+  .cinematic-group--competition .cinematic-scene > section { padding-top: clamp(72px, 10vh, 118px); padding-bottom: clamp(62px, 9vh, 100px); }
+  .cinematic-group--challenge #event-countdown { display: grid; place-items: center; }
+  .cinematic-group--challenge #prizes { display: grid; place-items: center; }
+  .cinematic-group--competition #rounds { display: grid; place-items: center; }
+  .cinematic-group--competition #rules { display: grid; place-items: center; }
+
+  .rounds-cinematic-track { position: relative; height: min(410px, 48vh); margin-left: 0; padding-left: 0; }
+  .rounds-cinematic-track > .round-cinematic-item {
+    position: absolute;
+    inset: 0;
+    padding-left: 42px;
+    will-change: transform, opacity;
+  }
+  .rounds-cinematic-track .round-cinematic-item > .absolute { left: 5px; }
+  .rounds-cinematic-track .round-cinematic-item > div:last-child { margin-left: 0; display: grid; align-content: center; min-height: 100%; }
+  #rounds .relative.pl-6 { padding-left: 0; }
+  #rounds .relative.pl-6 > .absolute { display: none; }
+
+  .cinematic-closing { position: relative; background: linear-gradient(180deg, #0c0d14, #12101e); }
+}
+
+@media (max-width: 899px), (prefers-reduced-motion: reduce) {
+  .cinematic-group { overflow: visible; }
+  .cinematic-scene { position: relative; }
+  .cinematic-scene > section { max-height: none; overflow: visible; }
+}
