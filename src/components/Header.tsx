@@ -29,7 +29,7 @@ export const Header: React.FC = () => {
 
   const handleNavClick = (href: string) => {
     setIsMenuOpen(false);
-    window.dispatchEvent(new CustomEvent('cinematic:navigate', { detail: href }));
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (

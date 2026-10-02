@@ -4,127 +4,68 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-type ChapterName = 'opening' | 'challenge' | 'competition';
-
-const targetProgress: Record<string, { chapter?: ChapterName; progress?: number }> = {
-  '#home': { chapter: 'opening', progress: 0 },
-  '#leadership': { chapter: 'opening', progress: 0.82 },
-  '#about': { chapter: 'challenge', progress: 0 },
-  '#why-relay': { chapter: 'challenge', progress: 0.36 },
-  '#event-countdown': { chapter: 'challenge', progress: 0.64 },
-  '#prizes': { chapter: 'challenge', progress: 0.91 },
-  '#rounds': { chapter: 'competition', progress: 0 },
-  '#rules': { chapter: 'competition', progress: 1 },
-};
-
-const desktopMotionQuery = '(min-width: 900px) and (prefers-reduced-motion: no-preference)';
-
-const isDesktopMotion = () =>
-  window.matchMedia(desktopMotionQuery).matches;
-
 export const useCinematicScroll = () => {
   useEffect(() => {
-    const navigate = (hash: string, immediate = false) => {
-      const target = targetProgress[hash];
-      const targetElement = document.querySelector<HTMLElement>(hash);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-      if (!target || !isDesktopMotion()) {
-        targetElement?.scrollIntoView({ behavior: immediate ? 'auto' : 'smooth', block: 'start' });
-        return;
-      }
-
-      const trigger = ScrollTrigger.getById('chapter-' + target.chapter);
-      if (!trigger) {
-        targetElement?.scrollIntoView({ behavior: immediate ? 'auto' : 'smooth', block: 'start' });
-        return;
-      }
-
-      const position = trigger.start + ((trigger.end - trigger.start) * (target.progress ?? 0));
-      window.history.replaceState(null, '', hash);
-      window.scrollTo({ top: position, behavior: immediate ? 'auto' : 'smooth' });
-    };
-
-    const onNavigate = (event: Event) => navigate((event as CustomEvent<string>).detail);
-    window.addEventListener('cinematic:navigate', onNavigate);
-
-    let media: ReturnType<typeof gsap.matchMedia> | undefined;
     const context = gsap.context(() => {
-      media = gsap.matchMedia();
-      media.add(desktopMotionQuery, () => {
-        const chapters = Array.from(document.querySelectorAll<HTMLElement>('[data-cinematic-group]'));
-        const timelines = new Map<ChapterName, gsap.core.Timeline>();
+      const hero = document.querySelector('#home');
 
-        chapters.forEach((chapter) => {
-          const name = chapter.dataset.cinematicGroup as ChapterName;
-          const scenes = Array.from(chapter.querySelectorAll<HTMLElement>('[data-cinematic-scene]'));
-          if (!name || scenes.length < 2) return;
-
-          gsap.set(scenes.slice(1), { yPercent: 105, opacity: 0, scale: 0.96, transformOrigin: 'center center' });
-          const scrollLength = name === 'opening' ? 2 : name === 'challenge' ? 4.2 : 3.7;
-          const timeline = gsap.timeline({
-            scrollTrigger: {
-              id: 'chapter-' + name,
-              trigger: chapter,
-              start: 'top top',
-              end: () => '+=' + (window.innerHeight * scrollLength),
-              scrub: 0.85,
-              pin: true,
-              anticipatePin: 1,
-              invalidateOnRefresh: true,
-            },
-          });
-          timelines.set(name, timeline);
-
-          scenes.slice(1).forEach((scene, index) => {
-            const previous = scenes[index];
-            const position = name === 'opening'
-              ? 0.55 + index
-              : name === 'challenge'
-                ? 0.5 + (index * 1.15)
-                : 2.35 + index;
-            timeline
-              .to(previous, { yPercent: -18, opacity: 0.16, scale: 0.93, duration: 1, ease: 'none' }, position)
-              .to(scene, { yPercent: 0, opacity: 1, scale: 1, duration: 1, ease: 'none' }, position);
-          });
+      if (hero) {
+        const heroTimeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: hero,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 0.7,
+            invalidateOnRefresh: true,
+          },
         });
 
-        const roundItems = Array.from(document.querySelectorAll<HTMLElement>('.round-cinematic-item'));
-        if (roundItems.length) {
-          gsap.set(roundItems.slice(1), { yPercent: 48, opacity: 0, scale: 0.94 });
-          const competitionTimeline = timelines.get('competition');
-          if (competitionTimeline) {
-            roundItems.slice(1).forEach((item, index) => {
-              const position = (index + 1) * 0.46;
-              competitionTimeline.to(roundItems[index], { opacity: 0.18, xPercent: -18, duration: 0.32, ease: 'none' }, position)
-                .to(item, { yPercent: 0, opacity: 1, scale: 1, duration: 0.32, ease: 'none' }, position);
-            });
-          }
-        }
+        heroTimeline
+          .to('.hero-parallax-copy', { yPercent: -11, opacity: 0.46, ease: 'none' }, 0);
+      }
 
-        gsap.utils.toArray<HTMLElement>('[data-cinematic-closing] > section, footer').forEach((section) => {
-          gsap.fromTo(section, { y: 48, opacity: 0.55 }, {
-            y: 0,
-            opacity: 1,
-            ease: 'none',
-            scrollTrigger: { trigger: section, start: 'top 88%', end: 'top 46%', scrub: true },
-          });
+      gsap.utils.toArray<HTMLElement>('.story-panel, #about, #prizes, #rounds, #contact').forEach((section) => {
+        const content = section.querySelector<HTMLElement>('.leadership-section__inner, .max-w-6xl, .max-w-5xl, .max-w-4xl');
+        if (!content) return;
+
+        gsap.fromTo(content, { y: 34, opacity: 0.72 }, {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: { trigger: section, start: 'top 76%', once: true },
         });
-
-        gsap.delayedCall(0, () => ScrollTrigger.refresh());
       });
+
+      gsap.utils.toArray<HTMLElement>('.coordinator-card').forEach((card, index) => {
+        const signal = card.querySelector<HTMLElement>('.coordinator-card__signal');
+        const timeline = gsap.timeline({
+          scrollTrigger: { trigger: card, start: 'top 82%', once: true },
+        });
+
+        timeline.fromTo(card, { y: 44, opacity: 0 }, {
+          y: 0,
+          opacity: 1,
+          duration: 0.72,
+          delay: index * 0.1,
+          ease: 'power3.out',
+        });
+
+        if (signal) {
+          timeline.fromTo(signal, { scaleX: 0 }, {
+            scaleX: 1,
+            duration: 0.55,
+            transformOrigin: 'left center',
+            ease: 'power2.out',
+          }, '-=0.25');
+        }
+      });
+
+      ScrollTrigger.refresh();
     });
 
-    const onResize = () => ScrollTrigger.refresh();
-    window.addEventListener('resize', onResize, { passive: true });
-
-    const hash = window.location.hash;
-    if (hash) window.setTimeout(() => navigate(hash, true), 120);
-
-    return () => {
-      media?.revert();
-      context.revert();
-      window.removeEventListener('resize', onResize);
-      window.removeEventListener('cinematic:navigate', onNavigate);
-    };
+    return () => context.revert();
   }, []);
 };
