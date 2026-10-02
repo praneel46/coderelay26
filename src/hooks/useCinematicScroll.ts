@@ -6,64 +6,51 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const useCinematicScroll = () => {
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
     const context = gsap.context(() => {
-      const hero = document.querySelector('#home');
+      const media = gsap.matchMedia();
 
-      if (hero) {
-        const heroTimeline = gsap.timeline({
-          scrollTrigger: {
-            trigger: hero,
-            start: 'top top',
-            end: 'bottom top',
-            scrub: 0.7,
-            invalidateOnRefresh: true,
-          },
-        });
+      media.add('(prefers-reduced-motion: no-preference)', () => {
+        const hero = document.querySelector<HTMLElement>('#home');
+        const leadership = document.querySelector<HTMLElement>('#leadership');
 
-        heroTimeline
-          .to('.hero-parallax-copy', { yPercent: -11, opacity: 0.46, ease: 'none' }, 0);
-      }
-
-      gsap.utils.toArray<HTMLElement>('.story-panel, #about, #prizes, #rounds, #contact').forEach((section) => {
-        const content = section.querySelector<HTMLElement>('.leadership-section__inner, .max-w-6xl, .max-w-5xl, .max-w-4xl');
-        if (!content) return;
-
-        gsap.fromTo(content, { y: 34, opacity: 0.72 }, {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: 'power2.out',
-          scrollTrigger: { trigger: section, start: 'top 76%', once: true },
-        });
-      });
-
-      gsap.utils.toArray<HTMLElement>('.coordinator-card').forEach((card, index) => {
-        const signal = card.querySelector<HTMLElement>('.coordinator-card__signal');
-        const timeline = gsap.timeline({
-          scrollTrigger: { trigger: card, start: 'top 82%', once: true },
-        });
-
-        timeline.fromTo(card, { y: 44, opacity: 0 }, {
-          y: 0,
-          opacity: 1,
-          duration: 0.72,
-          delay: index * 0.1,
-          ease: 'power3.out',
-        });
-
-        if (signal) {
-          timeline.fromTo(signal, { scaleX: 0 }, {
-            scaleX: 1,
-            duration: 0.55,
-            transformOrigin: 'left center',
-            ease: 'power2.out',
-          }, '-=0.25');
+        if (hero) {
+          gsap.timeline({
+            scrollTrigger: {
+              trigger: hero,
+              start: 'top top',
+              end: 'bottom top',
+              scrub: 0.65,
+              invalidateOnRefresh: true,
+            },
+          })
+            .to('.hero-parallax-copy', { yPercent: -12, opacity: 0.34, ease: 'none' }, 0)
+            .to('.hero-arena__sequence', { yPercent: 9, xPercent: 5, opacity: 0.3, ease: 'none' }, 0)
+            .to('.hero-arena__canvas', { scale: 1.07, yPercent: 8, opacity: 0.52, ease: 'none' }, 0)
+            .to('.hero-arena__footer', { yPercent: 30, opacity: 0, ease: 'none' }, 0);
         }
+
+        if (leadership) {
+          const heading = leadership.querySelector<HTMLElement>('.leadership-heading');
+          const stage = leadership.querySelector<HTMLElement>('.leadership-stage');
+          const navigation = leadership.querySelector<HTMLElement>('.leader-navigation');
+
+          gsap.timeline({
+            scrollTrigger: {
+              trigger: leadership,
+              start: 'top 82%',
+              end: 'top 38%',
+              scrub: 0.55,
+            },
+          })
+            .fromTo(heading, { y: 38, opacity: 0.2 }, { y: 0, opacity: 1, ease: 'none' }, 0)
+            .fromTo(stage, { y: 54, opacity: 0.18, scale: 0.97 }, { y: 0, opacity: 1, scale: 1, ease: 'none' }, 0.08)
+            .fromTo(navigation, { y: 16, opacity: 0 }, { y: 0, opacity: 1, ease: 'none' }, 0.26);
+        }
+
+        ScrollTrigger.refresh();
       });
 
-      ScrollTrigger.refresh();
+      return () => media.revert();
     });
 
     return () => context.revert();

@@ -19,10 +19,11 @@ export const LeadershipShowcase: React.FC = () => {
       <div className="leadership-section__inner">
         <div className="leadership-heading"><p>Institutional leadership</p><h2>Guidance that<br /><em>moves us forward.</em></h2></div>
         <div className="leadership-stage">
+          <div className="leadership-stage__path" aria-hidden="true"><span /><span /><i /></div>
           <AnimatePresence mode="wait">
-            <motion.div key={activeLeader.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -15 }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }} className="leader-card">
-              <div className="leader-card__portrait"><div className="leader-card__architecture" aria-hidden="true"><span /><span /></div><img src={activeLeader.image} alt={activeLeader.imageAlt} /></div>
-              <div className="leader-card__content"><p className="leader-card__role">{activeLeader.role}</p><h3>{activeLeader.name}</h3><p className="leader-card__institution">{activeLeader.institution}</p></div>
+            <motion.div key={activeLeader.id} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.62, ease: [0.16, 1, 0.3, 1] }} className="leader-card">
+              <motion.div initial={{ clipPath: 'inset(0 0 100% 0)' }} animate={{ clipPath: 'inset(0 0 0% 0)' }} exit={{ clipPath: 'inset(100% 0 0 0)' }} transition={{ duration: 0.58, ease: [0.16, 1, 0.3, 1] }} className="leader-card__portrait"><div className="leader-card__architecture" aria-hidden="true"><span /><span /></div><img src={activeLeader.image} alt={activeLeader.imageAlt} /></motion.div>
+              <motion.div initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -12 }} transition={{ duration: 0.48, delay: 0.12, ease: [0.16, 1, 0.3, 1] }} className="leader-card__content"><p className="leader-card__role">{activeLeader.role}</p><h3>{activeLeader.name}</h3><p className="leader-card__institution">{activeLeader.institution}</p></motion.div>
             </motion.div>
           </AnimatePresence>
         </div>

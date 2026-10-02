@@ -29,14 +29,21 @@ export const Header: React.FC = () => {
 
   const handleNavClick = (href: string) => {
     setIsMenuOpen(false);
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+    const target = document.querySelector<HTMLElement>(href);
+    const header = document.querySelector<HTMLElement>('.site-header');
+    if (!target) return;
+
+    const offset = (header?.offsetHeight ?? 0) + 12;
+    const position = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.history.replaceState(null, '', href);
+    window.scrollTo({ top: Math.max(0, position), behavior: 'smooth' });
   };
 
   return (
     <>
       <header className={'site-header ' + (isScrolled ? 'site-header--scrolled' : '')}>
         <div className="site-header__inner">
-          <a href="#home" className="site-brand" aria-label="SJB Institute of Technology, return home">
+          <a href="#home" className="site-brand" aria-label="SJB Institute of Technology, return home" onClick={(event) => { event.preventDefault(); handleNavClick('#home'); }}>
             <img src={sjbitLogo} alt="" width={58} height={58} />
             <span className="site-brand__copy">
               <strong>SJB Institute of Technology</strong>
@@ -45,7 +52,7 @@ export const Header: React.FC = () => {
           </a>
           <button type="button" className="site-menu-trigger" aria-label={isMenuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={isMenuOpen} onClick={() => setIsMenuOpen((open) => !open)}>
             <span>Menu</span>
-            <i aria-hidden="true"><b /><b /></i>
+            <i aria-hidden="true"><b /><b /><b /></i>
           </button>
         </div>
       </header>
@@ -59,13 +66,13 @@ export const Header: React.FC = () => {
                 <div><span>Vigyantra '26</span><p>Code Relay</p></div>
                 <button type="button" aria-label="Close navigation" onClick={() => setIsMenuOpen(false)}><X size={22} /></button>
               </div>
-              <nav className="site-menu-nav">
+              <motion.nav className="site-menu-nav" initial="closed" animate="open" exit="closed" variants={{ open: { transition: { staggerChildren: 0.045, delayChildren: 0.12 } }, closed: { transition: { staggerChildren: 0.025, staggerDirection: -1 } } }}>
                 {NAV_ITEMS.map((item) => (
-                  <button key={item.number} type="button" onClick={() => handleNavClick(item.href)}>
+                  <motion.button key={item.number} type="button" onClick={() => handleNavClick(item.href)} variants={{ open: { opacity: 1, x: 0 }, closed: { opacity: 0, x: 22 } }} transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}>
                     <span>{item.number}</span><strong>{item.label}</strong><ArrowUpRight size={19} />
-                  </button>
+                  </motion.button>
                 ))}
-              </nav>
+              </motion.nav>
               <div className="site-menu-drawer__bottom"><span>01 / 25 years of excellence</span><span>SJBIT Bengaluru</span></div>
             </motion.aside>
           </>
