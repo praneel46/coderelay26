@@ -1,0 +1,537 @@
+@import "tailwindcss";
+
+@theme {
+  --color-surface: #060913;
+  --color-surface-dim: #04060c;
+  --color-surface-bright: #1e2538;
+  --color-surface-container-lowest: #04060c;
+  --color-surface-container-low: #0a0e1a;
+  --color-surface-container: #0f131d;
+  --color-surface-container-high: #161c2b;
+  --color-surface-container-highest: #1f273b;
+  --color-on-surface: #e2e8f0;
+  --color-on-surface-variant: #94a3b8;
+  --color-primary: #f8fafc;
+  --color-primary-container: #00f0ff;
+  --color-outline: #64748b;
+  --color-outline-variant: rgba(255, 255, 255, 0.08);
+
+  --font-headline: "Space Grotesk", sans-serif;
+  --font-body: "Geist", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-body), sans-serif;
+  background-color: #04060c;
+  color: #e2e8f0;
+}
+
+.font-headline {
+  font-family: var(--font-headline), sans-serif;
+}
+
+.font-body {
+  font-family: var(--font-body), sans-serif;
+}
+
+.font-mono {
+  font-family: var(--font-mono), monospace;
+}
+
+/* Background Cyber Grid - Subtle & Continuous */
+.bg-grid-cyber {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+}
+
+/* Restrained Controlled Photonic Glow Utilities */
+.text-glow-cyan {
+  text-shadow: 0 0 12px rgba(0, 240, 255, 0.45);
+}
+
+.text-glow-cyan-sm {
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.35);
+}
+
+.box-glow-cyan {
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Ambient Subtle Cyan Pulse */
+@keyframes neonPulse {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+  }
+  50% {
+    text-shadow: 0 0 18px rgba(0, 240, 255, 0.65), 0 0 30px rgba(0, 240, 255, 0.25);
+  }
+}
+
+.animate-neon-pulse {
+  animation: neonPulse 4s ease-in-out infinite;
+}
+
+/* Sheen Reflection on Primary CTA */
+@keyframes sheenSweep {
+  0% { transform: translateX(-150%) skewX(-20deg); }
+  30%, 100% { transform: translateX(250%) skewX(-20deg); }
+}
+
+.sheen-active::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  animation: sheenSweep 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::after, ::before {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   VIGYANTRA 2026: editorial chapter system
+   The event content remains in its original components; these rules provide
+   distinct visual chapters, instead of one continuous cyber backdrop.
+   -------------------------------------------------------------------------- */
+
+:root {
+  color-scheme: light;
+  --event-ink: #151511;
+  --event-paper: #f4f0e8;
+  --event-mono: "DM Mono", "JetBrains Mono", monospace;
+  --event-display: "Playfair Display", Georgia, serif;
+  --event-body: "DM Sans", "Geist", sans-serif;
+}
+
+body {
+  background: var(--event-paper);
+  color: var(--event-ink);
+  font-family: var(--event-body), sans-serif;
+}
+
+.event-page {
+  background: var(--event-paper);
+  color: var(--event-ink);
+  font-family: var(--event-body), sans-serif;
+}
+
+.event-page .font-headline { font-family: var(--event-display), serif; }
+.event-page .font-body { font-family: var(--event-body), sans-serif; }
+.event-page .font-mono { font-family: var(--event-mono), monospace; }
+.event-page main { position: relative; z-index: 1; }
+
+.event-page main section {
+  --chapter-ink: #151511;
+  --chapter-muted: rgba(21, 21, 17, .66);
+  --chapter-line: rgba(21, 21, 17, .22);
+  --chapter-card: rgba(255, 255, 255, .2);
+  --chapter-accent: #7d3df0;
+  position: relative;
+  isolation: isolate;
+  color: var(--chapter-ink);
+  border-top: 1px solid var(--chapter-line);
+  overflow: hidden;
+}
+
+.event-page main section::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--chapter-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--chapter-line) 1px, transparent 1px);
+  background-size: clamp(84px, 12vw, 180px) clamp(84px, 12vw, 180px);
+  opacity: .35;
+}
+
+.event-page main section :is(.text-white, .text-slate-100, .text-slate-200, .text-slate-300) {
+  color: var(--chapter-ink) !important;
+}
+
+.event-page main section :is(.text-slate-400, .text-slate-500, .text-slate-600) {
+  color: var(--chapter-muted) !important;
+}
+
+.event-page main section .text-\[\#00f0ff\],
+.event-page main section .text-glow-cyan,
+.event-page main section .text-glow-cyan-sm {
+  color: var(--chapter-accent) !important;
+  text-shadow: none !important;
+}
+
+.event-page main section [class*="bg-\["] {
+  background-color: transparent !important;
+}
+
+.event-page main section [class*="border-white"] {
+  border-color: var(--chapter-line) !important;
+}
+
+.event-page main section [class*="rounded-xl"],
+.event-page main section [class*="rounded-2xl"] {
+  border-radius: 5px !important;
+  box-shadow: none !important;
+}
+
+.event-page main section h2 {
+  font-family: var(--event-display), serif !important;
+  letter-spacing: 0 !important;
+  line-height: .84 !important;
+}
+
+.event-page main section h3 {
+  font-family: var(--event-display), serif !important;
+  letter-spacing: 0 !important;
+}
+
+.event-page main section .font-mono {
+  letter-spacing: .05em;
+}
+
+/* Hero: pale editorial grid, large serif event name and contrasting controls. */
+.event-page #home {
+  --chapter-ink: #171714;
+  --chapter-muted: rgba(23, 23, 20, .66);
+  --chapter-line: rgba(23, 23, 20, .18);
+  --chapter-accent: #8b42f4;
+  min-height: calc(100svh - 64px);
+  background: var(--event-paper);
+}
+
+.event-page #home::after {
+  content: "2026";
+  position: absolute;
+  z-index: -1;
+  top: 9%;
+  right: -3vw;
+  color: rgba(139, 66, 244, .12);
+  font: 800 clamp(12rem, 31vw, 39rem)/.7 var(--event-display);
+  pointer-events: none;
+}
+
+.event-page #home > div {
+  max-width: 82rem;
+  text-align: left;
+  align-items: flex-start;
+}
+
+.event-page #home h1 {
+  font-family: var(--event-display), serif !important;
+  font-size: clamp(4rem, 12.5vw, 13.2rem) !important;
+  line-height: .7 !important;
+  letter-spacing: -.05em !important;
+  text-align: left;
+}
+
+.event-page #home h2 {
+  font-family: var(--event-mono), monospace !important;
+  font-size: clamp(.65rem, 1vw, .85rem) !important;
+  font-weight: 600;
+  letter-spacing: .18em !important;
+}
+
+.event-page #home h1 span:last-child {
+  display: inline-block;
+  padding-left: clamp(1rem, 13vw, 13rem);
+  font-style: italic;
+}
+
+.event-page #home .grid {
+  background: rgba(255,255,255,.34) !important;
+  border-color: var(--chapter-ink) !important;
+  border-radius: 0 !important;
+}
+
+.event-page #home a[href*="forms"] {
+  color: #f4f0e8 !important;
+  background: #151511 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.event-page #home a[href="#about"] {
+  color: #151511 !important;
+  border-color: #151511 !important;
+  border-radius: 0 !important;
+}
+
+.event-page #home img {
+  filter: grayscale(1) contrast(1.15);
+  mix-blend-mode: multiply;
+}
+
+/* Leadership: image-first institutional gallery. */
+.event-page #leadership {
+  --chapter-ink: #f4f0e8;
+  --chapter-muted: rgba(244, 240, 232, .72);
+  --chapter-line: rgba(244, 240, 232, .22);
+  --chapter-accent: #d8e800;
+  background: #171714;
+}
+
+.event-page #leadership::before {
+  opacity: .25;
+  background-size: 18vw 18vw;
+}
+
+.event-page #leadership h2 {
+  font-size: clamp(3.2rem, 8vw, 8rem) !important;
+  max-width: 13ch;
+}
+
+.event-page #leadership img {
+  filter: grayscale(1) contrast(1.16);
+  border-radius: 42% 42% 5px 5px;
+  border: 1px solid var(--chapter-line);
+}
+
+/* About: saturated violet statement with a deliberately uneven card stack. */
+.event-page #about {
+  --chapter-ink: #171714;
+  --chapter-muted: rgba(23, 23, 20, .7);
+  --chapter-line: rgba(23, 23, 20, .24);
+  --chapter-card: rgba(255, 255, 255, .2);
+  --chapter-accent: #f4f0e8;
+  background: #934af4;
+}
+
+.event-page #about h2 {
+  font-size: clamp(4.5rem, 10vw, 10.5rem) !important;
+}
+
+.event-page #about h2 span {
+  color: #f4f0e8 !important;
+  font-style: italic;
+}
+
+.event-page #about .lg\:col-span-6:last-child {
+  transform: translateY(8%);
+}
+
+.event-page #about .group {
+  background: var(--chapter-card) !important;
+  border-color: var(--chapter-line) !important;
+  border-radius: 0 !important;
+}
+
+.event-page #about .group:nth-child(2) { margin-left: 7%; }
+.event-page #about .group:nth-child(3) { margin-right: 12%; }
+
+/* Countdown: dark pause with a high-voltage acid highlight. */
+.event-page #event-countdown {
+  --chapter-ink: #f4f0e8;
+  --chapter-muted: rgba(244, 240, 232, .7);
+  --chapter-line: rgba(244, 240, 232, .2);
+  --chapter-accent: #d8e800;
+  background: #161617;
+}
+
+.event-page #event-countdown h2 {
+  font-size: clamp(3.8rem, 9vw, 9rem) !important;
+}
+
+.event-page #event-countdown [class*="rounded"] {
+  background: transparent !important;
+  border-color: var(--chapter-line) !important;
+  box-shadow: none !important;
+}
+
+.event-page #event-countdown [class*="border-\[\#00f0ff"] {
+  border-color: #d8e800 !important;
+}
+
+/* Prize section becomes a warm yellow reward board. */
+.event-page #prizes {
+  --chapter-ink: #171714;
+  --chapter-muted: rgba(23, 23, 20, .66);
+  --chapter-line: rgba(23, 23, 20, .26);
+  --chapter-card: rgba(244, 240, 232, .23);
+  --chapter-accent: #e44635;
+  background: #f3ca45;
+}
+
+.event-page #prizes h2 {
+  font-size: clamp(4rem, 9vw, 9.5rem) !important;
+}
+
+.event-page #prizes [class*="rounded"] {
+  background: var(--chapter-card) !important;
+  border-color: var(--chapter-line) !important;
+  box-shadow: none !important;
+}
+
+.event-page #prizes .text-\[\#00f0ff\] { color: #e44635 !important; }
+
+/* Rounds: paper chapter with a vertical relay route and varied timing blocks. */
+.event-page #rounds {
+  --chapter-ink: #171714;
+  --chapter-muted: rgba(23, 23, 20, .68);
+  --chapter-line: rgba(23, 23, 20, .23);
+  --chapter-card: rgba(255,255,255,.32);
+  --chapter-accent: #3155cc;
+  background: #f4f0e8;
+}
+
+.event-page #rounds h2 {
+  font-size: clamp(4rem, 9vw, 9rem) !important;
+}
+
+.event-page #rounds .group > div:last-child {
+  background: var(--chapter-card) !important;
+  border-radius: 0 !important;
+  border-color: var(--chapter-line) !important;
+}
+
+.event-page #rounds .group:nth-child(even) { margin-left: 8%; }
+
+/* Rules: blue workboard, keeping every accordion accessible and familiar. */
+.event-page #rules {
+  --chapter-ink: #f4f0e8;
+  --chapter-muted: rgba(244, 240, 232, .7);
+  --chapter-line: rgba(244, 240, 232, .28);
+  --chapter-accent: #f3ca45;
+  background: #3155cc;
+}
+
+.event-page #rules h2 {
+  font-size: clamp(3.8rem, 9vw, 9rem) !important;
+}
+
+.event-page #rules button {
+  border-bottom: 1px solid var(--chapter-line);
+}
+
+/* Why relay: acid-green application chapter. */
+.event-page #why-relay {
+  --chapter-ink: #171714;
+  --chapter-muted: rgba(23, 23, 20, .7);
+  --chapter-line: rgba(23, 23, 20, .26);
+  --chapter-card: rgba(255,255,255,.2);
+  --chapter-accent: #3155cc;
+  background: #d8e800;
+}
+
+.event-page #why-relay h2 {
+  font-size: clamp(4rem, 9vw, 9rem) !important;
+}
+
+.event-page #why-relay .group {
+  background: var(--chapter-card) !important;
+  border-color: var(--chapter-line) !important;
+  border-radius: 0 !important;
+}
+
+.event-page #why-relay .group:nth-child(2) { transform: translateY(12%); }
+
+/* FAQ: strong black quiet zone, styled for scanning rather than card clutter. */
+.event-page #faq {
+  --chapter-ink: #f4f0e8;
+  --chapter-muted: rgba(244, 240, 232, .68);
+  --chapter-line: rgba(244, 240, 232, .2);
+  --chapter-accent: #934af4;
+  background: #171714;
+}
+
+.event-page #faq h2 {
+  font-size: clamp(3.7rem, 8vw, 8.6rem) !important;
+}
+
+.event-page #faq .group { border-bottom: 1px solid var(--chapter-line); }
+
+/* Coordinators: coral introduction with portrait cards left intact. */
+.event-page #contact {
+  --chapter-ink: #171714;
+  --chapter-muted: rgba(23, 23, 20, .7);
+  --chapter-line: rgba(23, 23, 20, .28);
+  --chapter-card: rgba(244,240,232,.2);
+  --chapter-accent: #3155cc;
+  background: #f06c49;
+}
+
+.event-page #contact h2 {
+  font-size: clamp(4rem, 9vw, 9rem) !important;
+}
+
+.event-page #contact .group {
+  background: var(--chapter-card) !important;
+  border-color: var(--chapter-line) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.event-page #contact .group:nth-of-type(2) { transform: translateX(6%); }
+
+/* Venue returns to the editorial paper with the map as the visual hero. */
+.event-page #venue {
+  --chapter-ink: #171714;
+  --chapter-muted: rgba(23, 23, 20, .67);
+  --chapter-line: rgba(23, 23, 20, .23);
+  --chapter-accent: #934af4;
+  background: #f4f0e8;
+}
+
+.event-page #venue h2 {
+  font-size: clamp(4rem, 9vw, 9rem) !important;
+}
+
+.event-page #venue iframe { filter: grayscale(1) contrast(1.15); }
+.event-page #venue a { background: #171714 !important; color: #f4f0e8 !important; border-radius: 0 !important; }
+
+/* Header and footer have their own strong bookends. */
+.event-page + * { position: relative; }
+
+.event-page ~ footer,
+.event-page footer {
+  background: #171714;
+  color: #f4f0e8;
+  border-color: rgba(244,240,232,.2) !important;
+}
+
+.event-page footer :is(.text-white, .text-slate-100, .text-slate-200, .text-slate-300) { color: #f4f0e8 !important; }
+.event-page footer :is(.text-slate-400, .text-slate-500, .text-slate-600) { color: rgba(244,240,232,.65) !important; }
+.event-page footer .text-\[\#00f0ff\] { color: #d8e800 !important; }
+
+header {
+  border-color: rgba(23,23,20,.18) !important;
+}
+
+@media (max-width: 1023px) {
+  .event-page #about .lg\:col-span-6:last-child,
+  .event-page #why-relay .group:nth-child(2),
+  .event-page #contact .group:nth-of-type(2) {
+    transform: none;
+  }
+
+  .event-page #about .group:nth-child(2),
+  .event-page #rounds .group:nth-child(even) {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .event-page main section { padding-top: 4.5rem !important; padding-bottom: 4.5rem !important; }
+  .event-page #home { min-height: 760px; }
+  .event-page #home h1 { font-size: clamp(4.1rem, 21vw, 6.7rem) !important; }
+  .event-page #home h1 span:last-child { padding-left: 1.1rem; }
+  .event-page main section h2 { line-height: .86 !important; }
+  .event-page #about .group:nth-child(3) { margin-right: 0; }
+}
