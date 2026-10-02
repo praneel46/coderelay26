@@ -21,7 +21,7 @@ export const LeadershipShowcase: React.FC = () => {
         <div className="leadership-stage">
           <AnimatePresence mode="wait">
             <motion.div key={activeLeader.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -15 }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }} className="leader-card">
-              <div className="leader-card__portrait"><div className="leader-card__halo" aria-hidden="true" /><img src={activeLeader.image} alt={activeLeader.imageAlt} /></div>
+              <div className="leader-card__portrait"><div className="leader-card__architecture" aria-hidden="true"><span /><span /></div><img src={activeLeader.image} alt={activeLeader.imageAlt} /></div>
               <div className="leader-card__content"><p className="leader-card__role">{activeLeader.role}</p><h3>{activeLeader.name}</h3><p className="leader-card__institution">{activeLeader.institution}</p></div>
             </motion.div>
           </AnimatePresence>

@@ -23,10 +23,7 @@ export const useCinematicScroll = () => {
         });
 
         heroTimeline
-          .to('.hero-parallax-copy', { yPercent: -16, opacity: 0.42, ease: 'none' }, 0)
-          .to('.hero-parallax-jubilee', { xPercent: 14, yPercent: 24, scale: 0.8, ease: 'none' }, 0)
-          .to('.hero-signal-field', { yPercent: -11, xPercent: -3, ease: 'none' }, 0)
-          .to('.hero-footnote', { yPercent: -38, opacity: 0, ease: 'none' }, 0);
+          .to('.hero-parallax-copy', { yPercent: -11, opacity: 0.46, ease: 'none' }, 0);
       }
 
       gsap.utils.toArray<HTMLElement>('.story-panel, #about, #prizes, #rounds, #contact').forEach((section) => {
