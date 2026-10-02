@@ -6,197 +6,69 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const useCinematicScroll = () => {
   useEffect(() => {
-    // 1. Check for reduced motion accessibility preference
-    const prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    if (prefersReducedMotion) {
-      return;
-    }
+    const context = gsap.context(() => {
+      const hero = document.querySelector('#home');
 
-    const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia();
+      if (hero) {
+        const heroTimeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: hero,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 0.7,
+            invalidateOnRefresh: true,
+          },
+        });
 
-      // =========================================================================
-      // DESKTOP: CINEMATIC DEPTH & PINNED SECTION TRANSITIONS (≥ 1024px)
-      // =========================================================================
-      mm.add('(min-width: 1024px)', () => {
-        // Major visual transition sections
-        const majorTransitions = [
-          {
-            id: '#home',
-            innerSelector: '#home > div',
-            pin: true,
-            pinDuration: '+=25%',
-            scale: 0.975,
-            opacity: 0.88,
-            y: -25,
-          },
-          {
-            id: '#leadership',
-            innerSelector: '#leadership > div.max-w-6xl',
-            pin: false,
-            scale: 0.98,
-            opacity: 0.90,
-            y: -20,
-          },
-          {
-            id: '#about',
-            innerSelector: '#about > div.max-w-6xl',
-            pin: false,
-            scale: 0.98,
-            opacity: 0.90,
-            y: -20,
-          },
-          {
-            id: '#event-countdown',
-            innerSelector: '#event-countdown > div.max-w-4xl',
-            pin: false,
-            scale: 0.98,
-            opacity: 0.92,
-            y: -15,
-          },
-          {
-            id: '#prizes',
-            innerSelector: '#prizes > div.max-w-5xl',
-            pin: false,
-            scale: 0.98,
-            opacity: 0.90,
-            y: -20,
-          },
-          {
-            id: '#rounds',
-            innerSelector: '#rounds > div.max-w-4xl',
-            pin: false,
-            scale: 0.98,
-            opacity: 0.90,
-            y: -20,
-          },
-          {
-            id: '#why-relay',
-            innerSelector: '#why-relay > div.max-w-5xl',
-            pin: false,
-            scale: 0.98,
-            opacity: 0.90,
-            y: -20,
-          },
-        ];
+        heroTimeline
+          .to('.hero-parallax-copy', { yPercent: -16, opacity: 0.42, ease: 'none' }, 0)
+          .to('.hero-parallax-jubilee', { xPercent: 14, yPercent: 24, scale: 0.8, ease: 'none' }, 0)
+          .to('.hero-signal-field', { yPercent: -11, xPercent: -3, ease: 'none' }, 0)
+          .to('.hero-footnote', { yPercent: -38, opacity: 0, ease: 'none' }, 0);
+      }
 
-        majorTransitions.forEach((item) => {
-          const sectionEl = document.querySelector(item.id);
-          const innerEl = document.querySelector(item.innerSelector);
+      gsap.utils.toArray<HTMLElement>('.story-panel, #about, #prizes, #rounds, #contact').forEach((section) => {
+        const content = section.querySelector<HTMLElement>('.leadership-section__inner, .max-w-6xl, .max-w-5xl, .max-w-4xl');
+        if (!content) return;
 
-          if (!sectionEl || !innerEl) return;
-
-          if (item.pin) {
-            // Pinned camera transition for Hero
-            gsap.to(innerEl, {
-              scale: item.scale,
-              opacity: item.opacity,
-              y: item.y,
-              ease: 'power1.inOut',
-              scrollTrigger: {
-                trigger: sectionEl,
-                start: 'top top',
-                end: item.pinDuration || '+=30%',
-                pin: true,
-                pinSpacing: true,
-                scrub: 0.8,
-                anticipatePin: 1,
-                invalidateOnRefresh: true,
-              },
-            });
-          } else {
-            // Scrubbed depth recession as user scrolls away
-            gsap.to(innerEl, {
-              scale: item.scale,
-              opacity: item.opacity,
-              y: item.y,
-              ease: 'power1.out',
-              scrollTrigger: {
-                trigger: sectionEl,
-                start: 'bottom 85%',
-                end: 'bottom top',
-                scrub: 0.8,
-                invalidateOnRefresh: true,
-              },
-            });
-          }
+        gsap.fromTo(content, { y: 34, opacity: 0.72 }, {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: { trigger: section, start: 'top 76%', once: true },
         });
       });
 
-      // =========================================================================
-      // TABLET: SUBTLE SCRUBBED TRANSITION (768px - 1023px)
-      // =========================================================================
-      mm.add('(min-width: 768px) and (max-width: 1023px)', () => {
-        const sections = [
-          { id: '#home', inner: '#home > div' },
-          { id: '#leadership', inner: '#leadership > div.max-w-6xl' },
-          { id: '#about', inner: '#about > div.max-w-6xl' },
-          { id: '#prizes', inner: '#prizes > div.max-w-5xl' },
-          { id: '#why-relay', inner: '#why-relay > div.max-w-5xl' },
-        ];
-
-        sections.forEach(({ id, inner }) => {
-          const sectionEl = document.querySelector(id);
-          const innerEl = document.querySelector(inner);
-          if (!sectionEl || !innerEl) return;
-
-          gsap.to(innerEl, {
-            scale: 0.985,
-            opacity: 0.92,
-            y: -15,
-            ease: 'power1.out',
-            scrollTrigger: {
-              trigger: sectionEl,
-              start: 'bottom 80%',
-              end: 'bottom top',
-              scrub: 0.6,
-              invalidateOnRefresh: true,
-            },
-          });
+      gsap.utils.toArray<HTMLElement>('.coordinator-card').forEach((card, index) => {
+        const signal = card.querySelector<HTMLElement>('.coordinator-card__signal');
+        const timeline = gsap.timeline({
+          scrollTrigger: { trigger: card, start: 'top 82%', once: true },
         });
+
+        timeline.fromTo(card, { y: 44, opacity: 0 }, {
+          y: 0,
+          opacity: 1,
+          duration: 0.72,
+          delay: index * 0.1,
+          ease: 'power3.out',
+        });
+
+        if (signal) {
+          timeline.fromTo(signal, { scaleX: 0 }, {
+            scaleX: 1,
+            duration: 0.55,
+            transformOrigin: 'left center',
+            ease: 'power2.out',
+          }, '-=0.25');
+        }
       });
 
-      // =========================================================================
-      // MOBILE: ULTRA-LIGHT FLUID SCROLL (< 768px) — NO PINNING
-      // =========================================================================
-      mm.add('(max-width: 767px)', () => {
-        const sections = [
-          { id: '#home', inner: '#home > div' },
-          { id: '#leadership', inner: '#leadership > div.max-w-6xl' },
-          { id: '#about', inner: '#about > div.max-w-6xl' },
-          { id: '#prizes', inner: '#prizes > div.max-w-5xl' },
-          { id: '#why-relay', inner: '#why-relay > div.max-w-5xl' },
-        ];
-
-        sections.forEach(({ id, inner }) => {
-          const sectionEl = document.querySelector(id);
-          const innerEl = document.querySelector(inner);
-          if (!sectionEl || !innerEl) return;
-
-          gsap.to(innerEl, {
-            scale: 0.99,
-            opacity: 0.95,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: sectionEl,
-              start: 'bottom 90%',
-              end: 'bottom 10%',
-              scrub: 0.4,
-              invalidateOnRefresh: true,
-            },
-          });
-        });
-      });
-
-      // Refresh ScrollTrigger once DOM layout finishes rendering
       ScrollTrigger.refresh();
     });
 
-    return () => {
-      ctx.revert(); // Completely cleans up all ScrollTriggers and animations
-    };
+    return () => context.revert();
   }, []);
 };

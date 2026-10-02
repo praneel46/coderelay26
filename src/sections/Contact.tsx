@@ -68,8 +68,9 @@ export const Contact: React.FC = () => {
                 delay: index * 0.15,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className="group relative flex flex-col sm:flex-row items-center sm:items-start gap-5 p-6 rounded-2xl bg-[#0a0e19]/55 border border-white/[0.08] hover:border-[#00f0ff]/30 backdrop-blur-md transition-all duration-300"
+              className="coordinator-card group relative flex flex-col sm:flex-row items-center sm:items-start gap-5 p-6 rounded-2xl bg-[#0a0e19]/55 border border-white/[0.08] hover:border-[#00f0ff]/30 backdrop-blur-md transition-all duration-300"
             >
+              <span className="coordinator-card__signal" aria-hidden="true" />
               {/* Corner Engineering Accent */}
               <div className="absolute top-2.5 right-2.5 w-1.5 h-1.5 border-t border-r border-white/20 group-hover:border-[#00f0ff]/50 transition-colors" />
 

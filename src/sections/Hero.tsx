@@ -7,15 +7,19 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 export const Hero: React.FC = () => (
   <section id="home" className="event-hero" aria-label="Vigyantra 2026 Code Relay">
-    <div className="hero-light hero-light-one" aria-hidden="true" />
-    <div className="hero-light hero-light-two" aria-hidden="true" />
-    <div className="hero-orbit" aria-hidden="true" />
+    <div className="hero-signal-field" aria-hidden="true">
+      <span className="signal-track signal-track--one" /><span className="signal-track signal-track--two" />
+      <span className="signal-track signal-track--three" /><span className="signal-pulse signal-pulse--one" />
+      <span className="signal-pulse signal-pulse--two" />
+      <div className="hero-code-stack"><span>compile()</span><span>debug()</span><span>execute()</span></div>
+      <span className="hero-index hero-index--one">01</span><span className="hero-index hero-index--two">02</span>
+    </div>
     <div className="event-hero__inner">
       <motion.div initial={{ opacity: 0, y: -18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.12, ease }} className="hero-kicker">
         <span>Vigyantra 2026</span><span className="hero-kicker__line" /><span>30 October / SJBIT Bengaluru</span>
       </motion.div>
       <div className="hero-content">
-        <div className="hero-copy">
+        <div className="hero-copy hero-parallax-copy">
           <motion.p initial={{ opacity: 0, x: -22 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.3, ease }} className="hero-eyebrow">Think. Code. Debug. Relay.</motion.p>
           <h1 className="hero-title" aria-label="Code Relay">
             <motion.span initial={{ clipPath: 'inset(0 100% 0 0)', y: 30 }} animate={{ clipPath: 'inset(0 0% 0 0)', y: 0 }} transition={{ duration: 0.88, delay: 0.38, ease }}>Code</motion.span>
@@ -27,8 +31,8 @@ export const Hero: React.FC = () => (
             <a href="#about" className="hero-action hero-action--quiet">Event overview <FileText size={17} /></a>
           </motion.div>
         </div>
-        <motion.div initial={{ opacity: 0, scale: 0.8, rotate: -10 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} transition={{ duration: 1.05, delay: 0.34, ease }} className="jubilee-stage">
-          <div className="jubilee-stage__ring" aria-hidden="true" /><div className="jubilee-stage__flare" aria-hidden="true" />
+        <motion.div initial={{ opacity: 0, scale: 0.8, rotate: -4 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} transition={{ duration: 1.05, delay: 0.34, ease }} className="jubilee-stage hero-parallax-jubilee">
+          <div className="jubilee-stage__frame" aria-hidden="true" /><div className="jubilee-stage__flare" aria-hidden="true" />
           <img src={silverJubileeLogo} alt="SJBIT 25 Years Silver Jubilee 2026" className="jubilee-stage__logo" />
           <div className="jubilee-stage__label"><Sparkles size={14} /><span>25 years of excellence</span></div>
           <span className="jubilee-stage__number" aria-hidden="true">25</span>
