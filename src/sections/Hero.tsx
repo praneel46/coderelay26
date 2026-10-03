@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { MotionConfig, motion } from 'framer-motion';
 import { ArrowDownRight, ArrowUpRight, FileText } from 'lucide-react';
+import anniversaryLogo from '../assets/images/silver-jubilee-logo.png';
 
 const revealEase = [0.16, 1, 0.3, 1] as const;
 
@@ -31,22 +32,22 @@ const RelayCanvas: React.FC = () => {
       context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
     };
 
-    const curvePoint = (progress: number, lane: number) => {
+    const curvePoint = (progress: number) => {
       const x = (-0.08 + (progress * 1.16)) * width;
-      const baseY = height * (lane === 0 ? 0.34 : 0.67);
-      const y = baseY + Math.sin((progress * Math.PI * 1.25) + (lane * 1.4)) * height * 0.13;
+      const baseY = height * 0.52;
+      const y = baseY + Math.sin((progress * Math.PI * 1.1) - 0.75) * height * 0.16;
       return { x, y };
     };
 
-    const drawPath = (lane: number, opacity: number) => {
+    const drawPath = () => {
       context.beginPath();
       for (let step = 0; step <= 80; step += 1) {
-        const point = curvePoint(step / 80, lane);
+        const point = curvePoint(step / 80);
         if (step === 0) context.moveTo(point.x, point.y);
         else context.lineTo(point.x, point.y);
       }
-      context.strokeStyle = lane === 0 ? `rgba(204, 228, 58, ${opacity})` : `rgba(170, 115, 255, ${opacity})`;
-      context.lineWidth = lane === 0 ? 1.25 : 0.8;
+      context.strokeStyle = 'rgba(0, 240, 255, 0.26)';
+      context.lineWidth = 1;
       context.stroke();
     };
 
@@ -55,16 +56,16 @@ const RelayCanvas: React.FC = () => {
       const horizon = height * 0.2;
       const lower = height * 1.05;
 
-      context.strokeStyle = 'rgba(222, 231, 190, 0.06)';
+      context.strokeStyle = 'rgba(220, 233, 242, 0.035)';
       context.lineWidth = 1;
-      for (let index = 0; index < 13; index += 1) {
+      for (let index = 0; index < 8; index += 1) {
         const x = width * (index / 12);
         context.beginPath();
         context.moveTo(width * 0.5, horizon);
         context.lineTo(x, lower);
         context.stroke();
       }
-      for (let index = 0; index < 9; index += 1) {
+      for (let index = 0; index < 6; index += 1) {
         const depth = index / 8;
         const y = horizon + ((depth ** 1.8) * (lower - horizon));
         context.beginPath();
@@ -73,24 +74,16 @@ const RelayCanvas: React.FC = () => {
         context.stroke();
       }
 
-      drawPath(0, 0.42);
-      drawPath(1, 0.22);
+      drawPath();
 
-      const particleCount = width < 600 ? 5 : 9;
-      for (let index = 0; index < particleCount; index += 1) {
-        const lane = index % 2;
-        const speed = 0.00007 + (index * 0.000012);
-        const progress = (time * speed + (index / particleCount)) % 1;
-        const point = curvePoint(progress, lane);
-        const radius = lane === 0 ? 3.2 : 2.1;
-        context.beginPath();
-        context.fillStyle = lane === 0 ? 'rgba(204, 228, 58, 0.95)' : 'rgba(170, 115, 255, 0.8)';
-        context.shadowColor = lane === 0 ? '#cce43a' : '#aa73ff';
-        context.shadowBlur = lane === 0 ? 15 : 9;
-        context.arc(point.x, point.y, radius, 0, Math.PI * 2);
-        context.fill();
-        context.shadowBlur = 0;
-      }
+      const point = curvePoint((time * 0.000055) % 1);
+      context.beginPath();
+      context.fillStyle = 'rgba(0, 240, 255, 0.9)';
+      context.shadowColor = '#00f0ff';
+      context.shadowBlur = 13;
+      context.arc(point.x, point.y, 2.6, 0, Math.PI * 2);
+      context.fill();
+      context.shadowBlur = 0;
 
       if (!reduceMotion && pageVisible) frame = window.requestAnimationFrame(draw);
     };
@@ -138,43 +131,36 @@ export const Hero: React.FC = () => {
   };
 
   return (
+    <MotionConfig reducedMotion="user">
     <section id="home" ref={arenaRef} className="event-hero hero-arena" aria-label="Vigyantra 2026 Code Relay" onPointerMove={handlePointerMove}>
       <RelayCanvas />
       <div className="hero-arena__wash" aria-hidden="true" />
-      <div className="hero-arena__frame" aria-hidden="true" />
 
       <div className="event-hero__inner hero-arena__inner">
-        <motion.div initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.08, ease: revealEase }} className="hero-arena__meta">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.55, delay: 0.2, ease: revealEase }} className="hero-arena__meta">
           <span>Vigyantra 2026</span><span>SJBIT Bengaluru</span><span>30 October</span>
         </motion.div>
 
-        <div className="hero-arena__layout">
-          <div className="hero-arena__copy hero-parallax-copy">
-            <motion.p initial={{ opacity: 0, x: -18 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.55, delay: 0.22, ease: revealEase }} className="hero-arena__eyebrow">
-              <span>Protocol 01</span> Three minds. One uninterrupted run.
-            </motion.p>
-            <h1 className="hero-arena__title" aria-label="Code Relay">
-              <motion.span initial={{ clipPath: 'inset(0 100% 0 0)', y: 24 }} animate={{ clipPath: 'inset(0 0 0 0)', y: 0 }} transition={{ duration: 0.72, delay: 0.32, ease: revealEase }}>Code</motion.span>
-              <motion.span initial={{ clipPath: 'inset(0 0 0 100%)', y: 24 }} animate={{ clipPath: 'inset(0 0 0 0)', y: 0 }} transition={{ duration: 0.78, delay: 0.45, ease: revealEase }} className="hero-arena__title-accent">Relay</motion.span>
+        <div className="hero-opening hero-parallax-copy">
+          <svg className="hero-opening__signal" viewBox="0 0 1000 620" preserveAspectRatio="none" aria-hidden="true">
+            <motion.path d="M-50 470 C150 430 190 170 380 192 S620 500 760 290 S920 120 1080 180" initial={{ pathLength: 0, opacity: 0 }} animate={{ pathLength: 1, opacity: 1 }} transition={{ duration: 1.35, delay: 0.42, ease: 'easeInOut' }} />
+            <motion.circle cx="380" cy="192" r="5" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.28, delay: 1.12 }} />
+          </svg>
+          <motion.figure initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.62, delay: 1.06, ease: revealEase }} className="hero-opening__emblem">
+            <img src={anniversaryLogo} alt="SJB Institute of Technology 25 years of excellence" />
+          </motion.figure>
+          <div className="hero-opening__copy">
+            <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.48, delay: 1.5, ease: revealEase }} className="hero-opening__event">Vigyantra 2026</motion.p>
+            <h1 className="hero-opening__title" aria-label="Code Relay">
+              <motion.span initial={{ clipPath: 'inset(0 100% 0 0)' }} animate={{ clipPath: 'inset(0 0 0 0)' }} transition={{ duration: 0.75, delay: 1.92, ease: revealEase }}>Code</motion.span>
+              <motion.span initial={{ clipPath: 'inset(0 0 0 100%)' }} animate={{ clipPath: 'inset(0 0 0 0)' }} transition={{ duration: 0.86, delay: 2.22, ease: revealEase }}>Relay</motion.span>
             </h1>
-            <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.68, ease: revealEase }} className="hero-arena__tagline">Think. Code. Debug. Relay.</motion.p>
-            <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.76, ease: revealEase }} className="hero-arena__summary">A three-member programming relay where every handover carries the team closer to the finish.</motion.p>
-            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.88, ease: revealEase }} className="hero-arena__actions">
+            <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.46, delay: 2.92, ease: revealEase }} className="hero-opening__tagline">Think. Code. Debug. Relay.</motion.p>
+            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.46, delay: 3.15, ease: revealEase }} className="hero-arena__actions">
               <a href="https://forms.gle/4nJnwdTaFTGTXExS9" target="_blank" rel="noopener noreferrer" className="hero-arena__primary">Register <ArrowUpRight size={18} /></a>
               <a href="#about" className="hero-arena__secondary">Event overview <FileText size={16} /></a>
             </motion.div>
           </div>
-
-          <motion.div initial={{ opacity: 0, x: 28 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.46, ease: revealEase }} className="hero-arena__sequence" aria-label="Relay sequence">
-            <p>Live relay sequence</p>
-            <ol>
-              <li><span>01</span><strong>Parse</strong><ArrowDownRight size={14} /></li>
-              <li><span>02</span><strong>Build</strong><ArrowDownRight size={14} /></li>
-              <li><span>03</span><strong>Handoff</strong><ArrowDownRight size={14} /></li>
-              <li><span>04</span><strong>Finish</strong><ArrowDownRight size={14} /></li>
-            </ol>
-            <div className="hero-arena__sequence-status"><i /><span>Relay active</span></div>
-          </motion.div>
         </div>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.95 }} className="hero-arena__footer">
@@ -182,5 +168,6 @@ export const Hero: React.FC = () => {
         </motion.div>
       </div>
     </section>
+    </MotionConfig>
   );
 };

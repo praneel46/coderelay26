@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUpRight, X } from 'lucide-react';
-import { NAV_ITEMS } from '../data/navigation';
+import { HEADER_NAV_ITEMS } from '../data/navigation';
 import sjbitLogo from '../assets/images/sjbit-logo.png';
 
 export const Header: React.FC = () => {
@@ -67,7 +67,7 @@ export const Header: React.FC = () => {
                 <button type="button" aria-label="Close navigation" onClick={() => setIsMenuOpen(false)}><X size={22} /></button>
               </div>
               <motion.nav className="site-menu-nav" initial="closed" animate="open" exit="closed" variants={{ open: { transition: { staggerChildren: 0.045, delayChildren: 0.12 } }, closed: { transition: { staggerChildren: 0.025, staggerDirection: -1 } } }}>
-                {NAV_ITEMS.map((item) => (
+                {HEADER_NAV_ITEMS.map((item) => (
                   <motion.button key={item.number} type="button" onClick={() => handleNavClick(item.href)} variants={{ open: { opacity: 1, x: 0 }, closed: { opacity: 0, x: 22 } }} transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}>
                     <span>{item.number}</span><strong>{item.label}</strong><ArrowUpRight size={19} />
                   </motion.button>
