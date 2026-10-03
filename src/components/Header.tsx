@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowUpRight, X } from 'lucide-react';
 import { HEADER_NAV_ITEMS } from '../data/navigation';
-import sjbitLogo from '../assets/images/sjbit-logo.png';
+import sjbitLogo from '../assets/images/sjbit-header-logo.jpg';
 
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 20);
+    const onScroll = () => setIsScrolled(window.scrollY > 40);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -21,11 +19,6 @@ export const Header: React.FC = () => {
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
   }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [isMenuOpen]);
 
   const handleNavClick = (href: string) => {
     setIsMenuOpen(false);
@@ -40,44 +33,30 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <>
-      <header className={'site-header ' + (isScrolled ? 'site-header--scrolled' : '')}>
-        <div className="site-header__inner">
-          <a href="#home" className="site-brand" aria-label="SJB Institute of Technology, return home" onClick={(event) => { event.preventDefault(); handleNavClick('#home'); }}>
-            <img src={sjbitLogo} alt="" width={58} height={58} />
-            <span className="site-brand__copy">
-              <strong>SJB Institute of Technology</strong>
-              <small>Autonomous Institute · VTU</small>
-            </span>
-          </a>
-          <button type="button" className="site-menu-trigger" aria-label={isMenuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={isMenuOpen} onClick={() => setIsMenuOpen((open) => !open)}>
-            <span>Menu</span>
-            <i aria-hidden="true"><b /><b /><b /></i>
-          </button>
-        </div>
-      </header>
-
-      <AnimatePresence>
-        {isMenuOpen && (
-          <>
-            <motion.div className="site-menu-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsMenuOpen(false)} />
-            <motion.aside className="site-menu-drawer" aria-label="Site navigation" initial={{ x: '105%' }} animate={{ x: 0 }} exit={{ x: '105%' }} transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}>
-              <div className="site-menu-drawer__top">
-                <div><span>Vigyantra '26</span><p>Code Relay</p></div>
-                <button type="button" aria-label="Close navigation" onClick={() => setIsMenuOpen(false)}><X size={22} /></button>
-              </div>
-              <motion.nav className="site-menu-nav" initial="closed" animate="open" exit="closed" variants={{ open: { transition: { staggerChildren: 0.045, delayChildren: 0.12 } }, closed: { transition: { staggerChildren: 0.025, staggerDirection: -1 } } }}>
-                {HEADER_NAV_ITEMS.map((item) => (
-                  <motion.button key={item.number} type="button" onClick={() => handleNavClick(item.href)} variants={{ open: { opacity: 1, x: 0 }, closed: { opacity: 0, x: 22 } }} transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}>
-                    <span>{item.number}</span><strong>{item.label}</strong><ArrowUpRight size={19} />
-                  </motion.button>
-                ))}
-              </motion.nav>
-              <div className="site-menu-drawer__bottom"><span>01 / 25 years of excellence</span><span>SJBIT Bengaluru</span></div>
-            </motion.aside>
-          </>
-        )}
-      </AnimatePresence>
-    </>
+    <header className={'site-header ' + (isScrolled ? 'site-header--scrolled' : '')}>
+      <a href="#home" className="site-brand" aria-label="SJB Institute of Technology, return home" onClick={(event) => { event.preventDefault(); handleNavClick('#home'); }}>
+        <img src={sjbitLogo} alt="SJB Institute of Technology emblem" width={96} height={96} />
+        <span className="site-brand__copy">
+          <small className="site-brand__extra">|| JAI SRI GURUDEV ||</small>
+          <span className="site-brand__trust site-brand__extra">Sri Adichunchanagiri Shikshana Trust <sup>®</sup></span>
+          <strong>SJB INSTITUTE OF TECHNOLOGY</strong>
+          <small className="site-brand__university site-brand__extra">An autonomous institute under Visvesvaraya Technological University</small>
+        </span>
+      </a>
+      <nav className="site-header__nav" aria-label="Primary navigation">
+        <button type="button" onClick={() => handleNavClick('#home')}>Home</button>
+        <button type="button" onClick={() => handleNavClick('#about')}>About</button>
+        <button type="button" onClick={() => handleNavClick('#rounds')}>Events</button>
+        <a className="site-header__register" href="https://forms.gle/4nJnwdTaFTGTXExS9" target="_blank" rel="noopener noreferrer">Register</a>
+        <button type="button" className={'site-menu-trigger ' + (isMenuOpen ? 'open' : '')} aria-label={isMenuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={isMenuOpen} onClick={() => setIsMenuOpen((open) => !open)}>
+          <i aria-hidden="true"><b /><b /><b /></i>
+        </button>
+      </nav>
+      <nav className={'site-menu-panel ' + (isMenuOpen ? 'open' : '')} aria-label="Site navigation">
+        {HEADER_NAV_ITEMS.map((item) => (
+          <button key={item.number} type="button" onClick={() => handleNavClick(item.href)}><span>{item.number}</span>{item.label}</button>
+        ))}
+      </nav>
+    </header>
   );
 };

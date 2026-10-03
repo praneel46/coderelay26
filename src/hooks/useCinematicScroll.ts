@@ -24,9 +24,8 @@ export const useCinematicScroll = () => {
             },
           })
             .to('.hero-parallax-copy', { yPercent: -12, opacity: 0.34, ease: 'none' }, 0)
-            .to('.hero-opening__signal', { yPercent: 7, xPercent: 2, opacity: 0.38, ease: 'none' }, 0)
-            .to('.hero-arena__canvas', { scale: 1.07, yPercent: 8, opacity: 0.52, ease: 'none' }, 0)
-            .to('.hero-arena__footer', { yPercent: 30, opacity: 0, ease: 'none' }, 0);
+            .to('.network-hero__canvas', { scale: 1.04, yPercent: 6, opacity: 0.55, ease: 'none' }, 0)
+            .to('.network-hero__footer', { yPercent: 26, opacity: 0, ease: 'none' }, 0);
         }
 
         if (leadership) {
