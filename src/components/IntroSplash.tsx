@@ -33,7 +33,6 @@ export const IntroSplash: React.FC<IntroSplashProps> = ({ onReveal, onComplete }
   const skipButtonRef = useRef<HTMLButtonElement>(null);
   const [isExiting, setIsExiting] = useState(false);
   const [showSkip, setShowSkip] = useState(false);
-  const [autoplayBlocked, setAutoplayBlocked] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
 
   const choice = useMemo<VideoChoice>(() => (
@@ -64,8 +63,13 @@ export const IntroSplash: React.FC<IntroSplashProps> = ({ onReveal, onComplete }
 
     const attemptPlayback = () => {
       video?.play().catch(() => {
-        setAutoplayBlocked(true);
-        autoplayTimer.current = window.setTimeout(finish, 4000);
+        // Sound autoplay is commonly blocked on mobile; continue immediately muted.
+        if (!video) return;
+        video.muted = true;
+        setIsMuted(true);
+        video.play().catch(() => {
+          autoplayTimer.current = window.setTimeout(finish, 4000);
+        });
       });
     };
     const onStalled = () => {
@@ -74,7 +78,6 @@ export const IntroSplash: React.FC<IntroSplashProps> = ({ onReveal, onComplete }
     };
     const onPlaying = () => {
       playbackStarted.current = true;
-      setAutoplayBlocked(false);
       window.clearTimeout(stalledTimer);
       if (autoplayTimer.current) window.clearTimeout(autoplayTimer.current);
     };
@@ -129,13 +132,6 @@ export const IntroSplash: React.FC<IntroSplashProps> = ({ onReveal, onComplete }
     return () => document.removeEventListener('keydown', onKeyDown);
   }, [finish]);
 
-  const playFromTap = () => {
-    videoRef.current?.play().then(() => {
-      if (autoplayTimer.current) window.clearTimeout(autoplayTimer.current);
-      setAutoplayBlocked(false);
-    }).catch(finish);
-  };
-
   const toggleMute = () => {
     const video = videoRef.current;
     if (!video) return;
@@ -164,7 +160,6 @@ export const IntroSplash: React.FC<IntroSplashProps> = ({ onReveal, onComplete }
         controlsList="nodownload noremoteplayback"
         aria-hidden="true"
       />
-      {autoplayBlocked && <button type="button" className="intro-splash__play" onClick={playFromTap}>Tap to play</button>}
       <button type="button" className="intro-splash__sound" onClick={toggleMute} aria-label={isMuted ? 'Unmute introduction video' : 'Mute introduction video'}>
         {isMuted ? <VolumeX size={17} /> : <Volume2 size={17} />}
       </button>
