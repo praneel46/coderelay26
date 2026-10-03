@@ -46,7 +46,9 @@ export const useCinematicScroll = () => {
             .fromTo(navigation, { y: 16, opacity: 0 }, { y: 0, opacity: 1, ease: 'none' }, 0.26);
         }
 
-        ScrollTrigger.refresh();
+        const refreshFrame = window.requestAnimationFrame(() => ScrollTrigger.refresh());
+
+        return () => window.cancelAnimationFrame(refreshFrame);
       });
 
       return () => media.revert();

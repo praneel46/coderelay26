@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { ArrowUpRight } from 'lucide-react';
 import { HEADER_NAV_ITEMS } from '../data/navigation';
 import sjbitLogo from '../assets/images/sjbit-header-logo.jpg';
+
+const REGISTRATION_URL = 'https://forms.gle/4nJnwdTaFTGTXExS9';
 
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,13 +40,14 @@ export const Header: React.FC = () => {
       <a href="#home" className="site-brand" aria-label="SJB Institute of Technology, return home" onClick={(event) => { event.preventDefault(); handleNavClick('#home'); }}>
         <img src={sjbitLogo} alt="SJB Institute of Technology emblem" width={96} height={96} />
         <span className="site-brand__copy">
-          <small className="site-brand__extra">|| JAI SRI GURUDEV ||</small>
-          <span className="site-brand__trust site-brand__extra">Sri Adichunchanagiri Shikshana Trust <sup>®</sup></span>
+          <small className="site-brand__extra site-brand__greeting">|| JAI SRI GURUDEV ||</small>
+          <span className="site-brand__trust">Sri Adichunchanagiri Shikshana Trust <sup>®</sup></span>
           <strong>SJB INSTITUTE OF TECHNOLOGY</strong>
           <small className="site-brand__university site-brand__extra">An autonomous institute under Visvesvaraya Technological University</small>
         </span>
       </a>
       <nav className="site-header__nav" aria-label="Primary navigation">
+        <a className="site-header__register" href={REGISTRATION_URL} target="_blank" rel="noopener noreferrer" aria-label="Register for Code Relay (opens in a new tab)">Register <ArrowUpRight size={15} aria-hidden="true" /></a>
         <button type="button" className={'site-menu-trigger ' + (isMenuOpen ? 'open' : '')} aria-label={isMenuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={isMenuOpen} onClick={() => setIsMenuOpen((open) => !open)}>
           <i aria-hidden="true"><b /><b /><b /></i>
         </button>

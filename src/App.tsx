@@ -1,67 +1,25 @@
-import React from 'react';
-import { Header } from './components/Header';
-import { Hero } from './sections/Hero';
-import { LeadershipShowcase } from './sections/LeadershipShowcase';
-import { About } from './sections/About';
-import { EventCountdownSection } from './sections/EventCountdownSection';
-import { Prizes } from './sections/Prizes';
-import { Rounds } from './sections/Rounds';
-import { Rules } from './sections/Rules';
-import { WhyRelay } from './sections/WhyRelay';
-import { FAQ } from './sections/FAQ';
-import { Contact } from './sections/Contact';
-import { Venue } from './sections/Venue';
-import { Footer } from './components/Footer';
-import { useCinematicScroll } from './hooks/useCinematicScroll';
+import React, { lazy, Suspense, useCallback, useState } from 'react';
+import { IntroSplash } from './components/IntroSplash';
+import { useIntroGate } from './hooks/useIntroGate';
+
+// Prefetch the site bundle immediately, but do not mount it until the intro is ready.
+const siteContentPromise = import('./SiteContent');
+const SiteContent = lazy(() => siteContentPromise);
 
 export const App: React.FC = () => {
-  useCinematicScroll();
+  const { showIntro, completeIntro } = useIntroGate();
+  const [siteVisible, setSiteVisible] = useState(!showIntro);
+  const revealSite = useCallback(() => setSiteVisible(true), []);
 
   return (
-    <div className="event-page relative min-h-screen flex flex-col font-body overflow-x-hidden">
-
-      {/* 2. STICKY INSTITUTIONAL HEADER */}
-      <Header />
-
-      {/* Main event content: each chapter carries its own atmosphere. */}
-      <main className="relative z-10 flex-1 w-full flex flex-col">
-        {/* HERO SECTION */}
-        <Hero />
-
-        {/* SWAMIJI LEADERSHIP SHOWCASE */}
-        <LeadershipShowcase />
-
-        {/* 01 ABOUT / COMPETITION OVERVIEW */}
-        <About />
-
-        {/* DEDICATED EVENT COUNTDOWN SECTION */}
-        <EventCountdownSection />
-
-        {/* 02 PRIZES / BOUNTY POOL */}
-        <Prizes />
-
-        {/* 03 ROUNDS / EXECUTION PIPELINE */}
-        <Rounds />
-
-        {/* 04 RULES / EVENT PROTOCOL */}
-        <Rules />
-
-        {/* 05 WHY CODE RELAY? / ARCHITECTURAL VALUE */}
-        <WhyRelay />
-
-        {/* 06 FAQ / KNOWLEDGE BASE */}
-        <FAQ />
-
-        {/* 07 CONTACT / EVENT TEAM */}
-        <Contact />
-
-        {/* 08 VENUE / CAMPUS DATUM POINT */}
-        <Venue />
-      </main>
-
-      {/* 4. MINIMAL FOOTER WITH BACK TO TOP */}
-      <Footer />
-    </div>
+    <>
+      {siteVisible && (
+        <Suspense fallback={null}>
+          <SiteContent />
+        </Suspense>
+      )}
+      {showIntro && <IntroSplash onReveal={revealSite} onComplete={completeIntro} />}
+    </>
   );
 };
 
