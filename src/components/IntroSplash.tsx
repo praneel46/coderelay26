@@ -34,7 +34,7 @@ export const IntroSplash: React.FC<IntroSplashProps> = ({ onReveal, onComplete }
   const [isExiting, setIsExiting] = useState(false);
   const [showSkip, setShowSkip] = useState(false);
   const [autoplayBlocked, setAutoplayBlocked] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
 
   const choice = useMemo<VideoChoice>(() => (
     window.matchMedia('(min-aspect-ratio: 1/1)').matches || window.innerWidth >= 1024
@@ -60,6 +60,7 @@ export const IntroSplash: React.FC<IntroSplashProps> = ({ onReveal, onComplete }
     const safetyTimer = window.setTimeout(finish, INTRO_MAX_WAIT_MS);
     const video = videoRef.current;
     let stalledTimer = 0;
+    if (video) video.muted = false;
 
     const attemptPlayback = () => {
       video?.play().catch(() => {
@@ -156,7 +157,7 @@ export const IntroSplash: React.FC<IntroSplashProps> = ({ onReveal, onComplete }
         src={INTRO_VIDEOS[choice]}
         poster={INTRO_POSTERS[choice] ?? undefined}
         autoPlay
-        muted
+        muted={isMuted}
         playsInline
         preload="auto"
         disablePictureInPicture
