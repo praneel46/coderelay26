@@ -1,6 +1,5 @@
 import React from 'react';
 import { ArrowUp, Mail, Phone, MapPin } from 'lucide-react';
-import sjbitLogo from '../assets/images/sjbit-logo.png';
 import { NAV_ITEMS } from '../data/navigation';
 
 export const Footer: React.FC = () => {
@@ -28,30 +27,6 @@ export const Footer: React.FC = () => {
           
           {/* COLUMN 1 — EVENT IDENTITY */}
           <div className="flex flex-col space-y-4 text-left">
-            <div className="flex items-center gap-3">
-              <img
-                src={sjbitLogo}
-                alt="SJBIT Emblem"
-                className="w-10 h-10 object-contain drop-shadow-[0_0_8px_rgba(0,240,255,0.2)] shrink-0"
-                width={40}
-                height={40}
-              />
-              <div className="flex flex-col leading-tight">
-                <div className="flex items-center gap-1.5 flex-wrap">
-                  <span className="font-headline tracking-wider text-white text-sm font-bold uppercase">
-                    VIGYANTRA 2026
-                  </span>
-                  <span className="text-[#00f0ff] font-mono text-xs font-semibold">//</span>
-                  <span className="font-headline tracking-wider text-[#00f0ff] text-sm font-bold uppercase">
-                    CODE RELAY
-                  </span>
-                </div>
-                <span className="font-mono text-[9px] text-slate-400 tracking-wider uppercase mt-0.5">
-                  THINK. CODE. DEBUG. RELAY.
-                </span>
-              </div>
-            </div>
-
             <div className="space-y-1.5 pt-1">
               <p className="font-mono text-xs font-semibold text-slate-200 tracking-wide">
                 SJB INSTITUTE OF TECHNOLOGY

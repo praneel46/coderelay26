@@ -44,10 +44,6 @@ export const Header: React.FC = () => {
         </span>
       </a>
       <nav className="site-header__nav" aria-label="Primary navigation">
-        <button type="button" onClick={() => handleNavClick('#home')}>Home</button>
-        <button type="button" onClick={() => handleNavClick('#about')}>About</button>
-        <button type="button" onClick={() => handleNavClick('#rounds')}>Events</button>
-        <a className="site-header__register" href="https://forms.gle/4nJnwdTaFTGTXExS9" target="_blank" rel="noopener noreferrer">Register</a>
         <button type="button" className={'site-menu-trigger ' + (isMenuOpen ? 'open' : '')} aria-label={isMenuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={isMenuOpen} onClick={() => setIsMenuOpen((open) => !open)}>
           <i aria-hidden="true"><b /><b /><b /></i>
         </button>
