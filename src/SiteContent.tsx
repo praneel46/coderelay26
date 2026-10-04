@@ -9,7 +9,8 @@ import { Rounds } from './sections/Rounds';
 import { Rules } from './sections/Rules';
 import { WhyRelay } from './sections/WhyRelay';
 import { FAQ } from './sections/FAQ';
-import { Contact } from './sections/Contact';
+import { RegistrationCTA } from './sections/RegistrationCTA';
+import { CoreCrew } from './sections/CoreCrew';
 import { Venue } from './sections/Venue';
 import { Footer } from './components/Footer';
 import { useCinematicScroll } from './hooks/useCinematicScroll';
@@ -30,7 +31,8 @@ const SiteContent: React.FC = () => {
         <Rules />
         <WhyRelay />
         <FAQ />
-        <Contact />
+        <RegistrationCTA />
+        <CoreCrew />
         <Venue />
       </main>
       <Footer />

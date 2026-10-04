@@ -287,5 +287,56 @@ button, a { -webkit-tap-highlight-color: transparent; }
 @media (max-width:1023px) { .site-brand__trust { display:none; } }
 @media (max-width:480px) { .site-header { top:calc(env(safe-area-inset-top,0px) + 8px); right:8px; left:8px; gap:5px; padding:6px 8px; border-radius:10px; }.site-header--scrolled { padding:5px 8px; }.site-brand { gap:7px; }.site-brand img { width:36px; height:36px; }.site-brand__copy strong, .site-header--scrolled .site-brand__copy strong { font-size:13px; }.site-header__register { min-height:36px; padding:0 10px; font-size:10px; }.site-header__register svg { width:13px; height:13px; }.site-menu-trigger { width:36px; height:36px; }.site-menu-trigger i, .site-menu-trigger b { width:17px; }.network-hero__content { padding-top:88px; } }
 @media (max-width:340px) { .site-brand__copy strong, .site-header--scrolled .site-brand__copy strong { font-size:12px; }.site-header__register { padding:0 8px; font-size:9px; }.site-header__nav { gap:4px; } }
-@media (max-width:760px) { .site-header__register { display:none; }.site-header__nav { flex:0 0 auto; }.site-brand { flex:1 1 auto; min-width:0; }.site-brand__copy { min-width:0; overflow:hidden; }.site-brand__copy strong { max-width:100%; } }
+@media (max-width:760px) { .site-header__nav { flex:0 0 auto; }.site-brand { flex:1 1 auto; min-width:0; }.site-brand__copy { min-width:0; overflow:hidden; }.site-brand__copy strong { max-width:100%; } }
 @media (prefers-reduced-motion:reduce) { .intro-splash { display:none; } }
+
+/* Registration handoff and Core Crew personnel directory. */
+.registration-cta, .core-crew { --section-bg:#05060d !important; --section-fg:#eef1ff !important; --section-muted:rgba(238,241,255,.58) !important; --section-line:rgba(238,241,255,.14) !important; --section-accent:#22d3ee !important; background:#05060d !important; color:#eef1ff !important; overflow:hidden; }
+.registration-cta { min-height:360px; display:grid; place-items:center; padding:70px 22px 74px; border-top:1px solid rgba(238,241,255,.12); position:relative; isolation:isolate; }
+.registration-cta::before { content:''; position:absolute; inset:0; z-index:-1; pointer-events:none; opacity:.23; background:linear-gradient(90deg,rgba(34,211,238,.16) 1px,transparent 1px),linear-gradient(rgba(34,211,238,.1) 1px,transparent 1px); background-size:120px 120px; mask-image:linear-gradient(90deg,transparent,black 30%,transparent 80%); }
+.registration-cta__inner { width:min(100%,920px); text-align:center; }
+.registration-cta__eyebrow { margin:0 0 18px; color:#22d3ee; font:700 10px/1 var(--font-mono); letter-spacing:.18em; text-transform:uppercase; }
+.registration-cta__headline { display:flex; flex-wrap:wrap; justify-content:center; gap:0 .28em; margin:0; color:#f4f6ff; font:700 clamp(44px,7vw,92px)/.9 var(--font-body); letter-spacing:0; overflow:hidden; }
+.registration-cta__headline span { display:block; }
+.registration-cta__headline span:last-child { color:#22d3ee; }
+.registration-cta__copy { margin:20px auto 0; color:rgba(238,241,255,.6); font:500 11px/1.4 var(--font-mono); letter-spacing:.12em; text-transform:uppercase; }
+.registration-cta__button { display:inline-flex; align-items:center; gap:10px; min-height:50px; margin-top:28px; padding:0 20px; border:1px solid rgba(34,211,238,.66); border-radius:9px; background:#22d3ee; color:#05060d; font:700 11px/1 var(--font-mono); letter-spacing:.08em; text-decoration:none; transition:transform .2s ease,box-shadow .2s ease,background .2s ease; }
+.registration-cta__button:hover { background:#eef1ff; box-shadow:0 0 28px rgba(34,211,238,.24); transform:translateY(-2px); }
+.core-crew { padding:clamp(78px,9vw,136px) clamp(18px,5vw,72px) clamp(92px,11vw,156px); border-top:1px solid rgba(238,241,255,.14); position:relative; isolation:isolate; }
+.core-crew::before { content:''; position:absolute; inset:0; z-index:-1; pointer-events:none; opacity:.17; background-image:linear-gradient(rgba(34,211,238,.22) 1px,transparent 1px),linear-gradient(90deg,rgba(34,211,238,.22) 1px,transparent 1px); background-size:170px 170px; mask-image:linear-gradient(90deg,transparent,black 22%,black 78%,transparent); }
+.core-crew__inner { width:min(100%,1500px); margin:0 auto; }
+.core-crew__heading { display:flex; align-items:flex-end; justify-content:space-between; gap:30px; }
+.core-crew__heading p { margin:0 0 14px; color:#22d3ee; font:700 10px/1 var(--font-mono); letter-spacing:.15em; text-transform:uppercase; }
+.core-crew__heading h2 { margin:0; color:#f4f6ff !important; font:700 clamp(52px,8vw,118px)/.82 var(--font-body) !important; letter-spacing:0 !important; white-space:nowrap; }
+.core-crew__heading h2 em { color:#22d3ee; font-style:normal; }
+.core-crew__categories { display:flex; gap:8px; margin-top:38px; padding:0 0 12px; overflow-x:auto; scrollbar-width:thin; scrollbar-color:rgba(34,211,238,.6) transparent; }
+.core-crew__categories button { flex:0 0 auto; display:inline-flex; align-items:center; gap:8px; min-height:34px; padding:0 13px; border:1px solid rgba(238,241,255,.14); border-radius:999px; background:rgba(238,241,255,.025); color:rgba(238,241,255,.58); font:700 10px/1 var(--font-mono); letter-spacing:.1em; cursor:pointer; transition:color .2s ease,border-color .2s ease,background .2s ease; }
+.core-crew__categories button i { width:7px; height:7px; border-radius:50%; background:currentColor; opacity:.45; }
+.core-crew__categories button:hover, .core-crew__categories button.is-active { border-color:#22d3ee; background:rgba(34,211,238,.12); color:#22d3ee; }
+.core-crew__categories button.is-active i { opacity:1; box-shadow:0 0 10px rgba(34,211,238,.7); }
+.crew-stream { width:100%; margin-top:26px; overflow:hidden; border-top:1px solid rgba(238,241,255,.1); border-bottom:1px solid rgba(238,241,255,.1); padding:28px 0 34px; }
+.crew-track { display:flex; width:max-content; }
+.crew-track__group { display:flex; flex:0 0 auto; gap:22px; padding-right:22px; }
+.crew-track--marquee { animation:coreCrewMarquee 42s linear infinite; }
+.crew-stream--focused .crew-track--marquee { animation-play-state:paused; }
+@keyframes coreCrewMarquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+.crew-card { position:relative; flex:0 0 clamp(250px,22vw,334px); min-height:390px; padding:13px; border:1px solid rgba(238,241,255,.13); border-radius:16px; background:#070911; color:#eef1ff; outline:none; transition:border-color .22s ease,box-shadow .22s ease,transform .22s ease; }
+.crew-card::before, .crew-card::after { content:''; position:absolute; width:14px; height:14px; border-color:rgba(238,241,255,.28); pointer-events:none; }
+.crew-card::before { top:11px; left:11px; border-top:2px solid; border-left:2px solid; }.crew-card::after { right:11px; bottom:11px; border-right:2px solid; border-bottom:2px solid; }
+.crew-card--focused, .crew-card:focus-visible { border-color:#22d3ee; box-shadow:0 0 26px rgba(34,211,238,.12); transform:translateY(-3px); }
+.crew-card__topline { display:flex; align-items:center; justify-content:space-between; min-height:31px; padding:0 5px 11px; color:#22d3ee; font:700 9px/1 var(--font-mono); letter-spacing:.12em; }
+.crew-card__topline i { width:8px; height:8px; border-radius:50%; background:#22d3ee; box-shadow:0 0 0 4px rgba(34,211,238,.1); }
+.crew-card__portrait { position:relative; display:grid; place-items:center; height:235px; overflow:hidden; border:1px solid rgba(34,211,238,.22); border-radius:15px; background:#08131b; }
+.crew-card__grid { position:absolute; inset:0; opacity:.5; background-image:linear-gradient(rgba(34,211,238,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(34,211,238,.18) 1px,transparent 1px); background-size:24px 24px; }
+.crew-card__placeholder { position:relative; z-index:1; display:grid; place-items:center; gap:10px; color:rgba(238,241,255,.38); font:700 9px/1 var(--font-mono); letter-spacing:.14em; }
+.crew-card__scanline { position:absolute; z-index:2; right:0; left:0; top:-2px; height:1px; background:#22d3ee; box-shadow:0 0 14px 3px rgba(34,211,238,.55); opacity:0; }
+.crew-card--focused .crew-card__scanline { opacity:1; animation:crewScan 1.8s linear infinite; }
+@keyframes crewScan { from { transform:translateY(0); } to { transform:translateY(235px); } }
+.crew-card__details { display:grid; gap:8px; padding:24px 5px 7px; text-align:center; }
+.crew-card__details strong { overflow:hidden; color:#f4f6ff; font:700 20px/1.05 var(--font-body); letter-spacing:0; text-overflow:ellipsis; white-space:nowrap; }
+.crew-card__secondary { color:rgba(238,241,255,.48); font:500 10px/1.2 var(--font-mono); letter-spacing:.12em; text-decoration:none; }
+.crew-card__phone { display:inline-flex; align-items:center; justify-content:center; gap:5px; color:#22d3ee; }.crew-card__phone:hover { color:#f4f6ff; }
+.crew-card__status { position:absolute; right:14px; bottom:14px; color:#22d3ee; font:700 8px/1 var(--font-mono); letter-spacing:.15em; }
+.crew-empty { min-height:250px; display:grid; place-content:center; gap:10px; border:1px dashed rgba(238,241,255,.16); border-radius:12px; color:rgba(238,241,255,.42); text-align:center; }.crew-empty span { color:#22d3ee; font:700 9px/1 var(--font-mono); letter-spacing:.16em; }.crew-empty strong { font:700 17px/1 var(--font-body); letter-spacing:.08em; }
+@media (max-width:760px) { .registration-cta { min-height:310px; padding:60px 18px 66px; }.registration-cta__headline { font-size:clamp(39px,12vw,64px); gap:0 .22em; }.registration-cta__copy { max-width:300px; font-size:9px; line-height:1.6; }.core-crew { padding:72px 16px 96px; }.core-crew__heading { display:block; }.core-crew__heading p { margin-bottom:15px; font-size:9px; }.core-crew__heading h2 { font-size:clamp(49px,14vw,76px) !important; white-space:normal; }.core-crew__categories { margin-top:30px; margin-right:-16px; padding-right:16px; }.crew-stream { margin-top:20px; padding:20px 0 24px; }.crew-track__group { gap:14px; padding-right:14px; }.crew-track--marquee { animation-duration:34s; }.crew-card { flex-basis:min(78vw,300px); min-height:365px; }.crew-card__portrait { height:215px; }.crew-card--focused .crew-card__scanline { animation-duration:1.55s; } }
+@media (prefers-reduced-motion:reduce) { .registration-cta__headline span { clip-path:none !important; transform:none !important; }.registration-cta__button { opacity:1 !important; transform:none !important; }.crew-track--marquee { animation:none; }.crew-card--focused .crew-card__scanline { animation:none; opacity:1; } }
