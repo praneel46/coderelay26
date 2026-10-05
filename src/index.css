@@ -639,7 +639,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
 /* Compact crew cards and profile controls. */
 .crew-stream--marquee-shell { position:relative; overflow-x:auto; scrollbar-width:none; }
 .crew-stream--marquee-shell::-webkit-scrollbar { display:none; }
-.crew-stream--manual-paused .crew-track--marquee { animation-play-state:paused; }
+.crew-stream--focused .crew-track--marquee { animation-play-state:paused; }
+.crew-stream--static .crew-track { width:100%; }
+.crew-stream--static .crew-track__group { display:grid; width:100%; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; padding-right:0; }
 .crew-track--marquee { animation-duration:30s; }
 .crew-card { flex-basis:clamp(190px,17vw,240px); min-height:286px; padding:10px; border-radius:4px; }
 .crew-card__portrait { height:164px; }
@@ -652,7 +654,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .crew-stream__controls { position:absolute; z-index:5; top:7px; right:7px; display:flex; gap:4px; }
 .crew-stream__controls button { display:grid; place-items:center; width:24px; height:24px; padding:0; border:1px solid rgba(204,228,58,.42); border-radius:3px; background:rgba(25,27,37,.92); color:#cce43a; cursor:pointer; }
 .crew-stream__controls button:hover, .crew-stream__controls button:focus-visible { background:#cce43a; color:#111319; outline:none; }
-@media (max-width:760px) { .crew-track--marquee { animation-duration:24s; }.crew-card { flex-basis:min(65vw,240px); min-height:290px; }.crew-card__portrait { height:170px; }.crew-stream__controls { top:5px; right:5px; } }
+@media (max-width:760px) { .crew-track--marquee { animation-duration:24s; }.crew-card { flex-basis:min(65vw,240px); min-height:290px; }.crew-card__portrait { height:170px; }.crew-stream__controls { top:5px; right:5px; }.crew-stream--static .crew-track__group { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }.crew-stream--static .crew-card { min-width:0; min-height:235px; padding:7px; }.crew-stream--static .crew-card__portrait { height:112px; }.crew-stream--static .crew-card__details { padding-top:11px; gap:4px; }.crew-stream--static .crew-card__details strong { font-size:11px; white-space:normal; line-height:1.1; }.crew-stream--static .crew-card__topline { min-height:24px; padding-bottom:7px; font-size:7px; letter-spacing:.08em; }.crew-stream--static .crew-card__linkedin { width:20px; height:20px; } }
 
 /* Registration form handoff dialog. The iframe begins loading immediately while the loader stays visible. */
 .site-header__register, .network-hero__primary, .registration-cta__button { appearance:none; cursor:pointer; }

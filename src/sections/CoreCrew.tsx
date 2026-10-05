@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ExternalLink, Phone, ScanLine } from 'lucide-react';
 import { ALL_CREW, CORE_LEADS, CREW_CATEGORIES, FACULTY_COMMITTEE, TECH_AND_DEV, type CrewCategory, type CrewMember } from '../data/coreCrew';
@@ -26,8 +26,8 @@ const CrewCard: React.FC<CrewCardProps> = ({ member, focused, duplicate = false,
   return (
     <article
       className={'crew-card' + (focused ? ' crew-card--focused' : '') + (scanOnFocus ? ' crew-card--scannable' : '')}
-      onPointerEnter={() => canFocus && onFocus(member.id)}
-      onPointerLeave={(event) => { if (canFocus && event.pointerType === 'mouse') onLeave(); }}
+      onPointerEnter={() => canFocus && scanOnFocus && onFocus(member.id)}
+      onPointerLeave={(event) => { if (canFocus && scanOnFocus && event.pointerType === 'mouse') onLeave(); }}
       onPointerDown={() => canFocus && onFocus(member.id)}
       tabIndex={duplicate ? -1 : 0}
       onFocus={() => canFocus && onFocus(member.id)}
@@ -54,20 +54,16 @@ const CrewCard: React.FC<CrewCardProps> = ({ member, focused, duplicate = false,
 export const CoreCrew: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<CrewCategory>('leads');
   const [focusedId, setFocusedId] = useState<string | null>(null);
-  const [manualPaused, setManualPaused] = useState(false);
   const streamRef = useRef<HTMLDivElement>(null);
-  const pauseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [marqueeDirection, setMarqueeDirection] = useState<1 | -1>(1);
   const visibleMembers = useMemo(() => CATEGORY_DATA[activeCategory], [activeCategory]);
   const isMarquee = activeCategory === 'all';
   const scanOnFocus = activeCategory === 'faculty';
 
-  useEffect(() => () => { if (pauseTimer.current) clearTimeout(pauseTimer.current); }, []);
-
   const handleNudge = (direction: number) => {
     streamRef.current?.scrollBy({ left: direction * 220, behavior: 'smooth' });
-    setManualPaused(true);
-    if (pauseTimer.current) clearTimeout(pauseTimer.current);
-    pauseTimer.current = setTimeout(() => setManualPaused(false), 1800);
+    setFocusedId(null);
+    setMarqueeDirection(direction < 0 ? -1 : 1);
   };
 
   return (
@@ -80,19 +76,19 @@ export const CoreCrew: React.FC = () => {
 
         <nav className="core-crew__categories" aria-label="Crew categories">
           {CREW_CATEGORIES.map((category) => (
-            <button key={category.id} type="button" className={activeCategory === category.id ? 'is-active' : ''} onClick={(event) => { setActiveCategory(category.id); setFocusedId(null); event.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); }}>
+            <button key={category.id} type="button" className={activeCategory === category.id ? 'is-active' : ''} onClick={(event) => { setActiveCategory(category.id); setFocusedId(null); setMarqueeDirection(1); event.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); }}>
               <i aria-hidden="true" />{category.label}
             </button>
           ))}
         </nav>
 
-        <div ref={streamRef} className={'crew-stream' + (isMarquee ? ' crew-stream--marquee-shell' : '') + (manualPaused ? ' crew-stream--manual-paused' : '')}>
+        <div ref={streamRef} className={'crew-stream' + (isMarquee ? ' crew-stream--marquee-shell' : ' crew-stream--static') + (isMarquee && focusedId ? ' crew-stream--focused' : '')}>
           {isMarquee && <div className="crew-stream__controls" aria-label="All crew navigation">
             <button type="button" onClick={() => handleNudge(-1)} aria-label="Show previous crew members"><ChevronLeft size={13} /></button>
             <button type="button" onClick={() => handleNudge(1)} aria-label="Show next crew members"><ChevronRight size={13} /></button>
           </div>}
           {visibleMembers.length > 0 ? (
-            <div className={'crew-track' + (isMarquee ? ' crew-track--marquee' : '')}>
+            <div className={'crew-track' + (isMarquee ? ' crew-track--marquee' : '')} style={isMarquee ? { animationDirection: marqueeDirection === -1 ? 'reverse' : 'normal' } : undefined}>
               <div className="crew-track__group">
                 {visibleMembers.map((member) => <CrewCard key={member.id} member={member} focused={focusedId === member.id} scanOnFocus={scanOnFocus} onFocus={setFocusedId} onLeave={() => setFocusedId(null)} />)}
               </div>
