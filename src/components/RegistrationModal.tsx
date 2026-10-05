@@ -63,7 +63,12 @@ export const RegistrationProvider: React.FC<React.PropsWithChildren> = ({ childr
               <button type="button" className="registration-modal__close" onClick={closeRegistration} aria-label="Cancel registration redirect"><X size={18} /></button>
             </div>
             <div className="registration-modal__frame">
-              <div className="registration-modal__loader" aria-live="polite"><span className="registration-modal__spinner" /><strong>CONNECTING TO REGISTRATION</strong><small>Taking you to the entry form...</small></div>
+              <div className="registration-modal__loader" aria-live="polite">
+                <div className="registration-modal__code-field" aria-hidden="true"><span>01 // HANDSHAKE</span><span>AUTH::RELAY_ENTRY</span><span>FORM_CHANNEL: ONLINE</span><span>REDIRECTING...</span></div>
+                <div className="registration-modal__loader-core"><span className="registration-modal__spinner" /><span className="registration-modal__loader-glyph">&lt;/&gt;</span></div>
+                <strong>CONNECTING TO REGISTRATION</strong>
+                <small>Taking you to the entry form<span className="registration-modal__dots">...</span></small>
+              </div>
             </div>
           </div>
         </div>
