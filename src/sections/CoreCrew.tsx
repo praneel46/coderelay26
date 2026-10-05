@@ -65,13 +65,13 @@ export const CoreCrew: React.FC = () => {
     <section id="contact" className="core-crew" aria-label="The Core Crew">
       <div className="core-crew__inner">
         <motion.div className="core-crew__heading" initial={{ opacity: 0, x: -28 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: '-12% 0px' }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}>
-          <p>Personnel directory // Vigyantra operations</p>
+          <p>PERSONNEL DIRECTORY</p>
           <h2>THE <em>CORE</em> CREW</h2>
         </motion.div>
 
         <nav className="core-crew__categories" aria-label="Crew categories">
           {CREW_CATEGORIES.map((category) => (
-            <button key={category.id} type="button" className={activeCategory === category.id ? 'is-active' : ''} onClick={() => { setActiveCategory(category.id); setFocusedId(null); }}>
+            <button key={category.id} type="button" className={activeCategory === category.id ? 'is-active' : ''} onClick={(event) => { setActiveCategory(category.id); setFocusedId(null); event.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); }}>
               <i aria-hidden="true" />{category.label}
             </button>
           ))}

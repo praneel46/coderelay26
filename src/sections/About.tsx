@@ -47,21 +47,6 @@ export const About: React.FC = () => {
       <div className="max-w-6xl mx-auto relative z-10">
         
         {/* Technical Label */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-8 sm:mb-12"
-        >
-          <div className="inline-flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00f0ff] animate-pulse" />
-            <span className="font-mono text-xs sm:text-sm text-slate-400 tracking-[0.25em] uppercase font-medium">
-              01 // COMPETITION OVERVIEW
-            </span>
-          </div>
-        </motion.div>
-
         {/* Two-Column Editorial Grid (Desktop) / Stacked (Mobile) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           

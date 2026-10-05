@@ -21,9 +21,6 @@ export const Venue: React.FC = () => {
           transition={{ duration: 0.5 }}
           className="text-center sm:text-left mb-6 sm:mb-8"
         >
-          <span className="font-mono text-xs sm:text-sm text-slate-400 tracking-[0.25em] uppercase font-medium">
-            08 // CAMPUS DATUM POINT
-          </span>
           <h2 className="font-headline text-2xl sm:text-3xl md:text-4xl text-white font-bold tracking-tight mt-1">
             VENUE &amp; LOCATION
           </h2>
@@ -72,5 +69,4 @@ export const Venue: React.FC = () => {
     </section>
   );
 };
-
 

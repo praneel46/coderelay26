@@ -100,9 +100,6 @@ export const Prizes: React.FC = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-8 sm:mb-10"
         >
-          <span className="font-mono text-xs sm:text-sm text-slate-400 tracking-[0.25em] uppercase font-medium">
-            02 // BOUNTY POOL TELEMETRY
-          </span>
           <h2 className="font-headline text-2xl sm:text-3xl md:text-4xl text-white font-bold tracking-tight mt-1">
             REWARDS &amp; HONORS
           </h2>

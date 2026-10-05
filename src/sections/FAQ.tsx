@@ -104,9 +104,6 @@ export const FAQ: React.FC = () => {
           transition={{ duration: 0.5 }}
           className="text-center sm:text-left mb-12 sm:mb-16"
         >
-          <span className="font-mono text-xs sm:text-sm text-slate-400 tracking-[0.25em] uppercase font-medium">
-            06 // KNOWLEDGE BASE
-          </span>
           <h2 className="font-headline text-2xl sm:text-3xl md:text-4xl text-white font-bold tracking-tight mt-1">
             FREQUENTLY ASKED QUESTIONS
           </h2>

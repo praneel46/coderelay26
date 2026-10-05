@@ -340,3 +340,299 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .crew-empty { min-height:250px; display:grid; place-content:center; gap:10px; border:1px dashed rgba(238,241,255,.16); border-radius:12px; color:rgba(238,241,255,.42); text-align:center; }.crew-empty span { color:#22d3ee; font:700 9px/1 var(--font-mono); letter-spacing:.16em; }.crew-empty strong { font:700 17px/1 var(--font-body); letter-spacing:.08em; }
 @media (max-width:760px) { .registration-cta { min-height:310px; padding:60px 18px 66px; }.registration-cta__headline { font-size:clamp(39px,12vw,64px); gap:0 .22em; }.registration-cta__copy { max-width:300px; font-size:9px; line-height:1.6; }.core-crew { padding:72px 16px 96px; }.core-crew__heading { display:block; }.core-crew__heading p { margin-bottom:15px; font-size:9px; }.core-crew__heading h2 { font-size:clamp(49px,14vw,76px) !important; white-space:normal; }.core-crew__categories { margin-top:30px; margin-right:-16px; padding-right:16px; }.crew-stream { margin-top:20px; padding:20px 0 24px; }.crew-track__group { gap:14px; padding-right:14px; }.crew-track--marquee { animation-duration:34s; }.crew-card { flex-basis:min(78vw,300px); min-height:365px; }.crew-card__portrait { height:215px; }.crew-card--focused .crew-card__scanline { animation-duration:1.55s; } }
 @media (prefers-reduced-motion:reduce) { .registration-cta__headline span { clip-path:none !important; transform:none !important; }.registration-cta__button { opacity:1 !important; transform:none !important; }.crew-track--marquee { animation:none; }.crew-card--focused .crew-card__scanline { animation:none; opacity:1; } }
+
+/* FAQ handoff: keep registration and crew on the same editorial terminal surface. */
+.event-page #registration, .event-page #contact { --section-bg:#191b25 !important; --section-fg:#f1eee6 !important; --section-muted:rgba(241,238,230,.65) !important; --section-line:rgba(241,238,230,.17) !important; --section-accent:#cce43a !important; background:#191b25 !important; color:#f1eee6 !important; }
+.registration-cta { min-height:0; display:block; padding:clamp(80px,10vw,145px) 16px; border-top:0; border-bottom:1px solid rgba(241,238,230,.17); }
+.registration-cta::before, .core-crew::before { display:none; }
+.registration-cta__inner { width:min(100%,1024px); margin:0 auto; text-align:left; }
+.registration-cta__eyebrow, .core-crew__heading p { margin:0 0 8px; color:#cce43a; font:700 10px/1 var(--font-mono); letter-spacing:.25em; text-transform:uppercase; }
+.registration-cta__headline { justify-content:flex-start; gap:0 .28em; color:#f1eee6; font:700 clamp(48px,7vw,100px)/.86 var(--font-headline); }
+.registration-cta__headline span:last-child { color:#cce43a; }
+.registration-cta__copy { margin:18px 0 0; max-width:560px; color:rgba(241,238,230,.65); font:300 14px/1.6 var(--font-body); letter-spacing:0; text-transform:none; }
+.registration-cta__button { min-height:48px; margin-top:28px; padding:0 18px; border:1px solid #cce43a; border-radius:3px; background:#cce43a; color:#111319; font:700 11px/1 var(--font-mono); letter-spacing:.08em; }
+.registration-cta__button:hover { background:#f1eee6; box-shadow:0 0 24px rgba(204,228,58,.18); }
+.core-crew { padding:clamp(80px,10vw,145px) 16px; border-top:0; }
+.core-crew__inner { width:min(100%,1024px); }
+.core-crew__heading { display:block; }
+.core-crew__heading p { margin-bottom:8px; }
+.core-crew__heading h2 { color:#f1eee6 !important; font:700 clamp(48px,7vw,100px)/.86 var(--font-headline) !important; white-space:normal; }
+.core-crew__heading h2 em { color:#cce43a; }
+.core-crew__categories { gap:0; margin-top:34px; padding:0; border-top:1px solid rgba(241,238,230,.17); border-bottom:1px solid rgba(241,238,230,.17); scrollbar-width:none; scroll-behavior:smooth; scroll-snap-type:x proximity; }
+.core-crew__categories::-webkit-scrollbar { display:none; }
+.core-crew__categories button { min-height:48px; padding:0 14px; border:0; border-right:1px solid rgba(241,238,230,.12); border-radius:0; background:transparent; color:rgba(241,238,230,.65); font-size:10px; letter-spacing:.15em; scroll-snap-align:center; }
+.core-crew__categories button:first-child { padding-left:0; }
+.core-crew__categories button:hover, .core-crew__categories button.is-active { border-color:rgba(241,238,230,.12); background:rgba(204,228,58,.12); color:#cce43a; }
+.core-crew__categories button i { width:6px; height:6px; }
+.crew-stream { margin-top:28px; border-top:1px solid rgba(241,238,230,.17); border-bottom:1px solid rgba(241,238,230,.17); padding:24px 0 30px; }
+.crew-track__group { gap:16px; padding-right:16px; }
+.crew-card { flex-basis:clamp(250px,22vw,310px); min-height:360px; border-color:rgba(241,238,230,.17); border-radius:4px; background:rgba(241,238,230,.035); }
+.crew-card::before, .crew-card::after { border-color:rgba(204,228,58,.45); }
+.crew-card--focused, .crew-card:focus-visible { border-color:#cce43a; box-shadow:0 0 24px rgba(204,228,58,.12); }
+.crew-card__topline { color:#cce43a; }
+.crew-card__topline i { background:#cce43a; box-shadow:0 0 0 4px rgba(204,228,58,.1); }
+.crew-card__portrait { height:220px; border-color:rgba(204,228,58,.22); border-radius:3px; background:#191b25; }
+.crew-card__grid { background-image:linear-gradient(rgba(204,228,58,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(204,228,58,.14) 1px,transparent 1px); }
+.crew-card__scanline { background:#cce43a; box-shadow:0 0 14px 3px rgba(204,228,58,.45); }
+.crew-card__details { padding-top:22px; }
+.crew-card__details strong { color:#f1eee6; font-size:18px; }
+.crew-card__secondary { color:rgba(241,238,230,.48); }
+.crew-card__phone { color:#cce43a; }
+.crew-card__status { color:#cce43a; }
+.crew-empty { min-height:220px; border-radius:3px; border-color:rgba(241,238,230,.17); }
+.crew-empty span { color:#cce43a; }
+@media (max-width:760px) {
+  .registration-cta, .core-crew { padding-top:72px; padding-bottom:92px; }
+  .registration-cta__headline, .core-crew__heading h2 { font-size:clamp(48px,14vw,76px) !important; }
+  .registration-cta__copy { font-size:14px; }
+  .core-crew__categories { margin-top:28px; margin-right:-16px; padding-right:16px; overscroll-behavior-inline:contain; touch-action:pan-x; }
+  .core-crew__categories button { min-height:50px; }
+  .core-crew__categories button:first-child { padding-left:14px; }
+  .crew-stream { margin-top:22px; }
+  .crew-card { flex-basis:min(78vw,300px); min-height:350px; }
+  .crew-card__portrait { height:205px; }
+}
+
+/* =========================================================================
+   MECHANICAL 3D SPLIT-FLAP FLIP CLOCK (digitalclock.live/flip-clock inspired)
+   ========================================================================= */
+.flip-clock-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 2vw, 24px);
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 12px 0;
+  perspective: 1000px;
+}
+
+.flip-unit-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.flip-unit-digits {
+  display: flex;
+  gap: 4px;
+}
+
+.flip-digit-card {
+  position: relative;
+  width: clamp(34px, 6.5vw, 56px);
+  height: clamp(52px, 10vw, 84px);
+  border-radius: 6px;
+  background: #080d19;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), 0 2px 6px rgba(0, 0, 0, 0.5);
+  perspective: 320px;
+  transform-style: preserve-3d;
+  user-select: none;
+}
+
+.flip-card-half {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  background: #0d1322;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-card-top {
+  top: 0;
+  border-radius: 6px 6px 0 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.7);
+  transform-origin: 50% 100%;
+  background: linear-gradient(180deg, #131a2c 0%, #0d1322 100%);
+}
+
+.flip-card-bottom {
+  bottom: 0;
+  border-radius: 0 0 6px 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  transform-origin: 50% 0%;
+  background: linear-gradient(180deg, #0b101d 0%, #080c16 100%);
+}
+
+.flip-digit-glyph {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 200%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-headline), "Space Grotesk", sans-serif;
+  font-size: clamp(32px, 6.4vw, 54px);
+  font-weight: 700;
+  line-height: 1;
+  color: #f8fafc;
+  text-align: center;
+}
+
+.flip-card-top .flip-digit-glyph {
+  top: 0;
+}
+
+.flip-card-bottom .flip-digit-glyph {
+  bottom: 0;
+}
+
+/* Center Horizontal Seam */
+.flip-card-seam {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.9);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
+  z-index: 6;
+  pointer-events: none;
+}
+
+/* Mechanical Side Axle Hinge Notches */
+.flip-card-hinge {
+  position: absolute;
+  top: calc(50% - 3px);
+  width: 3px;
+  height: 6px;
+  background: #04060c;
+  z-index: 7;
+  pointer-events: none;
+}
+
+.flip-hinge-left {
+  left: 0;
+  border-radius: 0 2px 2px 0;
+}
+
+.flip-hinge-right {
+  right: 0;
+  border-radius: 2px 0 0 2px;
+}
+
+/* Flip Animations */
+.flip-leaf-front {
+  z-index: 4;
+  animation: flipDownTop 0.55s cubic-bezier(0.37, 0, 0.63, 1) forwards;
+}
+
+.flip-leaf-back {
+  z-index: 5;
+  transform: rotateX(90deg);
+  animation: flipDownBottom 0.55s cubic-bezier(0.37, 0, 0.63, 1) 0.12s forwards;
+}
+
+@keyframes flipDownTop {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(-90deg);
+  }
+}
+
+@keyframes flipDownBottom {
+  0% {
+    transform: rotateX(90deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+/* Dynamic Flip Shadow Creases */
+.flip-leaf-shadow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.flip-shadow-top {
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.75) 100%);
+  animation: shadowFadeIn 0.55s ease-in forwards;
+}
+
+.flip-shadow-bottom {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.75) 0%, transparent 100%);
+  animation: shadowFadeOut 0.55s ease-out 0.12s forwards;
+}
+
+@keyframes shadowFadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes shadowFadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Seconds & Active Unit Accents */
+.flip-unit-accent .flip-card-half {
+  border-color: rgba(0, 240, 255, 0.35);
+}
+
+.flip-unit-accent .flip-card-top {
+  background: linear-gradient(180deg, #0e1c2e 0%, #0a1524 100%);
+}
+
+.flip-unit-accent .flip-card-bottom {
+  background: linear-gradient(180deg, #07101c 0%, #050b14 100%);
+}
+
+.flip-unit-accent .flip-digit-glyph {
+  color: #00f0ff;
+  text-shadow: 0 0 14px rgba(0, 240, 255, 0.5);
+}
+
+.flip-unit-accent .flip-unit-label {
+  color: #00f0ff;
+  font-weight: 700;
+}
+
+/* Labels and Separators */
+.flip-unit-label {
+  font-family: var(--font-mono), "JetBrains Mono", monospace;
+  font-size: clamp(8px, 1.3vw, 11px);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.flip-colon-separator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(8px, 1.6vw, 14px);
+  margin-top: clamp(-16px, -2vw, -22px);
+  height: clamp(52px, 10vw, 84px);
+}
+
+.flip-colon-dot {
+  width: clamp(4px, 0.7vw, 6px);
+  height: clamp(4px, 0.7vw, 6px);
+  border-radius: 50%;
+  background: #00f0ff;
+  box-shadow: 0 0 8px #00f0ff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-leaf-front,
+  .flip-leaf-back {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+

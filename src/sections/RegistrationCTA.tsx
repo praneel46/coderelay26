@@ -8,7 +8,7 @@ const HEADLINE_WORDS = ['READY', 'TO', 'ENTER', 'THE', 'RELAY?'];
 export const RegistrationCTA: React.FC = () => (
   <section id="registration" className="registration-cta" aria-label="Register for Code Relay">
     <div className="registration-cta__inner">
-      <p className="registration-cta__eyebrow">FINAL TRANSMISSION // REGISTRATION OPEN</p>
+      <p className="registration-cta__eyebrow">REGISTRATION OPEN</p>
       <h2 className="registration-cta__headline" aria-label={HEADLINE_WORDS.join(' ')}>
         {HEADLINE_WORDS.map((word, index) => (
           <motion.span
