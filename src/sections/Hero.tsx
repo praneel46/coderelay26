@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { MotionConfig, motion } from 'framer-motion';
 import { ArrowDownRight, ArrowUpRight, FileText } from 'lucide-react';
+import { useRegistrationModal } from '../components/RegistrationModal';
 
 const revealEase = [0.16, 1, 0.3, 1] as const;
 
@@ -150,6 +151,7 @@ const NetworkCanvas: React.FC = () => {
 };
 
 export const Hero: React.FC = () => {
+  const { openRegistration } = useRegistrationModal();
   const arenaRef = useRef<HTMLElement>(null);
   const pointerFrame = useRef(0);
 
@@ -183,7 +185,7 @@ export const Hero: React.FC = () => {
             <span>Think.</span><span>Code.</span><span>Debug.</span><span>Relay.</span>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.72, delay: 0.78, ease: revealEase }} className="network-hero__actions">
-            <a href="https://forms.gle/4nJnwdTaFTGTXExS9" target="_blank" rel="noopener noreferrer" className="network-hero__primary">Register now <ArrowUpRight size={18} /></a>
+            <button type="button" onClick={openRegistration} className="network-hero__primary">Register now <ArrowUpRight size={18} /></button>
             <a href="#about" className="network-hero__secondary">Event overview <FileText size={17} /></a>
           </motion.div>
         </div>

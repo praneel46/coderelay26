@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { HEADER_NAV_ITEMS } from '../data/navigation';
 import sjbitLogo from '../assets/images/sjbit-header-logo.jpg';
-
-const REGISTRATION_URL = 'https://forms.gle/4nJnwdTaFTGTXExS9';
+import { useRegistrationModal } from './RegistrationModal';
 
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { openRegistration } = useRegistrationModal();
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 40);
@@ -47,7 +47,7 @@ export const Header: React.FC = () => {
         </span>
       </a>
       <nav className="site-header__nav" aria-label="Primary navigation">
-        <a className="site-header__register" href={REGISTRATION_URL} target="_blank" rel="noopener noreferrer" aria-label="Register for Code Relay (opens in a new tab)">Register <ArrowUpRight size={15} aria-hidden="true" /></a>
+        <button type="button" className="site-header__register" onClick={openRegistration} aria-label="Open Code Relay registration form">Register <ArrowUpRight size={15} aria-hidden="true" /></button>
         <button type="button" className={'site-menu-trigger ' + (isMenuOpen ? 'open' : '')} aria-label={isMenuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={isMenuOpen} onClick={() => setIsMenuOpen((open) => !open)}>
           <i aria-hidden="true"><b /><b /><b /></i>
         </button>

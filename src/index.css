@@ -636,3 +636,45 @@ button, a { -webkit-tap-highlight-color: transparent; }
   }
 }
 
+/* Compact crew cards and profile controls. */
+.crew-stream--marquee-shell { position:relative; overflow-x:auto; scrollbar-width:none; }
+.crew-stream--marquee-shell::-webkit-scrollbar { display:none; }
+.crew-stream--manual-paused .crew-track--marquee { animation-play-state:paused; }
+.crew-track--marquee { animation-duration:30s; }
+.crew-card { flex-basis:clamp(190px,17vw,240px); min-height:286px; padding:10px; border-radius:4px; }
+.crew-card__portrait { height:164px; }
+.crew-card__image { position:relative; z-index:1; width:100%; height:100%; object-fit:cover; object-position:center top; }
+.crew-card__details { position:relative; padding:17px 4px 6px; gap:6px; }
+.crew-card__details strong { font-size:15px; }
+.crew-card__linkedin { display:inline-flex; align-items:center; justify-content:center; justify-self:center; width:24px; height:24px; border:1px solid rgba(204,228,58,.35); border-radius:3px; color:#cce43a; transition:background .2s ease,color .2s ease,transform .2s ease; }
+.crew-card__linkedin:hover, .crew-card__linkedin:focus-visible { background:#cce43a; color:#111319; transform:translateY(-1px); }
+.crew-card__phone { display:inline-flex; align-items:center; justify-content:center; gap:4px; color:inherit; text-decoration:none; }
+.crew-stream__controls { position:absolute; z-index:5; top:7px; right:7px; display:flex; gap:4px; }
+.crew-stream__controls button { display:grid; place-items:center; width:24px; height:24px; padding:0; border:1px solid rgba(204,228,58,.42); border-radius:3px; background:rgba(25,27,37,.92); color:#cce43a; cursor:pointer; }
+.crew-stream__controls button:hover, .crew-stream__controls button:focus-visible { background:#cce43a; color:#111319; outline:none; }
+@media (max-width:760px) { .crew-track--marquee { animation-duration:24s; }.crew-card { flex-basis:min(65vw,240px); min-height:290px; }.crew-card__portrait { height:170px; }.crew-stream__controls { top:5px; right:5px; } }
+
+/* Registration form handoff dialog. The iframe begins loading immediately while the loader stays visible. */
+.site-header__register, .network-hero__primary, .registration-cta__button { appearance:none; cursor:pointer; }
+.registration-modal { position:fixed; inset:0; z-index:100; display:grid; place-items:center; padding:clamp(12px,3vw,32px); color:#f1eee6; }
+.registration-modal__backdrop { position:absolute; inset:0; border:0; background:rgba(3,5,12,.82); backdrop-filter:blur(12px); cursor:pointer; }
+.registration-modal__panel { position:relative; z-index:1; display:flex; width:min(100%,900px); max-height:min(92vh,860px); flex-direction:column; overflow:hidden; border:1px solid rgba(204,228,58,.42); border-radius:8px; background:#191b25; box-shadow:0 24px 90px rgba(0,0,0,.65),0 0 45px rgba(204,228,58,.08); animation:registrationModalIn .34s cubic-bezier(.16,1,.3,1) both; }
+@keyframes registrationModalIn { from { opacity:0; transform:translateY(16px) scale(.98); } to { opacity:1; transform:none; } }
+.registration-modal__header { display:flex; align-items:flex-start; justify-content:space-between; gap:20px; padding:18px 20px 15px; border-bottom:1px solid rgba(241,238,230,.14); }
+.registration-modal__eyebrow { color:#cce43a; font:700 9px/1 var(--font-mono); letter-spacing:.18em; }
+.registration-modal__header h2 { margin:7px 0 0; color:#f1eee6; font:700 clamp(24px,4vw,38px)/.9 var(--font-headline); }
+.registration-modal__close { display:grid; place-items:center; width:34px; height:34px; flex:0 0 auto; border:1px solid rgba(241,238,230,.2); border-radius:4px; background:transparent; color:#f1eee6; cursor:pointer; }
+.registration-modal__close:hover, .registration-modal__close:focus-visible { border-color:#cce43a; color:#cce43a; outline:none; }
+.registration-modal__frame { position:relative; min-height:min(68vh,660px); background:#f1eee6; }
+.registration-modal__frame iframe { display:block; width:100%; height:min(68vh,660px); border:0; opacity:0; transition:opacity .3s ease; }
+.registration-modal__frame.is-loaded iframe { opacity:1; }
+.registration-modal__loader { position:absolute; inset:0; z-index:2; display:grid; place-content:center; justify-items:center; gap:12px; background:#191b25; color:#f1eee6; text-align:center; transition:opacity .25s ease; }
+.registration-modal__frame.is-loaded .registration-modal__loader { pointer-events:none; opacity:0; }
+.registration-modal__spinner { width:54px; height:54px; border:3px solid rgba(204,228,58,.15); border-top-color:#cce43a; border-right-color:#f1eee6; border-radius:50%; box-shadow:0 0 24px rgba(204,228,58,.18); animation:registrationSpinner .9s linear infinite; }
+@keyframes registrationSpinner { to { transform:rotate(360deg); } }
+.registration-modal__loader strong { font:700 10px/1 var(--font-mono); letter-spacing:.16em; color:#cce43a; }
+.registration-modal__loader small { color:rgba(241,238,230,.6); font:500 11px/1.4 var(--font-mono); }
+.registration-modal__fallback { display:inline-flex; align-items:center; justify-content:center; gap:6px; min-height:42px; border-top:1px solid rgba(241,238,230,.14); color:rgba(241,238,230,.68); font:700 10px/1 var(--font-mono); letter-spacing:.08em; text-decoration:none; }
+.registration-modal__fallback:hover { color:#cce43a; }
+@media (max-width:600px) { .registration-modal { padding:10px; }.registration-modal__panel { max-height:94vh; border-radius:6px; }.registration-modal__header { padding:15px 14px 13px; }.registration-modal__frame, .registration-modal__frame iframe { min-height:72vh; height:72vh; }.registration-modal__fallback { min-height:38px; font-size:9px; } }
+@media (prefers-reduced-motion:reduce) { .registration-modal__panel, .registration-modal__spinner { animation:none; } }

@@ -1,12 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
-
-const REGISTRATION_URL = 'https://forms.gle/4nJnwdTaFTGTXExS9';
+import { useRegistrationModal } from '../components/RegistrationModal';
 const HEADLINE_WORDS = ['READY', 'TO', 'ENTER', 'THE', 'RELAY?'];
 
-export const RegistrationCTA: React.FC = () => (
-  <section id="registration" className="registration-cta" aria-label="Register for Code Relay">
+export const RegistrationCTA: React.FC = () => {
+  const { openRegistration } = useRegistrationModal();
+
+  return (
+    <section id="registration" className="registration-cta" aria-label="Register for Code Relay">
     <div className="registration-cta__inner">
       <p className="registration-cta__eyebrow">REGISTRATION OPEN</p>
       <h2 className="registration-cta__headline" aria-label={HEADLINE_WORDS.join(' ')}>
@@ -23,10 +25,9 @@ export const RegistrationCTA: React.FC = () => (
         ))}
       </h2>
       <p className="registration-cta__copy">Stop watching. Build your team. Take the baton.</p>
-      <motion.a
-        href={REGISTRATION_URL}
-        target="_blank"
-        rel="noopener noreferrer"
+      <motion.button
+        type="button"
+        onClick={openRegistration}
         className="registration-cta__button"
         initial={{ opacity: 0, y: 14 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -34,7 +35,8 @@ export const RegistrationCTA: React.FC = () => (
         transition={{ duration: 0.55, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
       >
         REGISTER NOW <ArrowUpRight size={18} aria-hidden="true" />
-      </motion.a>
+      </motion.button>
     </div>
-  </section>
-);
+    </section>
+  );
+};
