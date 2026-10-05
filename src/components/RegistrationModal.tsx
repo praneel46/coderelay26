@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { ExternalLink, X } from 'lucide-react';
+import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
+import { X } from 'lucide-react';
 
 export const REGISTRATION_URL = 'https://forms.gle/4nJnwdTaFTGTXExS9';
 
@@ -17,14 +17,20 @@ export const useRegistrationModal = (): RegistrationContextValue => {
 
 export const RegistrationProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const navigationTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const closeRegistration = () => {
+    if (navigationTimer.current) clearTimeout(navigationTimer.current);
+    navigationTimer.current = null;
+    setIsOpen(false);
+  };
 
   useEffect(() => {
     if (!isOpen) return undefined;
 
     const previousOverflow = document.body.style.overflow;
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setIsOpen(false);
+      if (event.key === 'Escape') closeRegistration();
     };
 
     document.body.style.overflow = 'hidden';
@@ -36,8 +42,10 @@ export const RegistrationProvider: React.FC<React.PropsWithChildren> = ({ childr
   }, [isOpen]);
 
   const openRegistration = () => {
-    setIsLoaded(false);
     setIsOpen(true);
+    navigationTimer.current = setTimeout(() => {
+      window.location.assign(REGISTRATION_URL);
+    }, 700);
   };
 
   return (
@@ -45,20 +53,18 @@ export const RegistrationProvider: React.FC<React.PropsWithChildren> = ({ childr
       {children}
       {isOpen && (
         <div className="registration-modal" role="dialog" aria-modal="true" aria-labelledby="registration-modal-title">
-          <button type="button" className="registration-modal__backdrop" aria-label="Close registration form" onClick={() => setIsOpen(false)} />
+          <button type="button" className="registration-modal__backdrop" aria-label="Cancel registration redirect" onClick={closeRegistration} />
           <div className="registration-modal__panel">
             <div className="registration-modal__header">
               <div>
                 <span className="registration-modal__eyebrow">SECURE REGISTRATION CHANNEL</span>
                 <h2 id="registration-modal-title">CODE RELAY ENTRY</h2>
               </div>
-              <button type="button" className="registration-modal__close" onClick={() => setIsOpen(false)} aria-label="Close registration form"><X size={18} /></button>
+              <button type="button" className="registration-modal__close" onClick={closeRegistration} aria-label="Cancel registration redirect"><X size={18} /></button>
             </div>
-            <div className={'registration-modal__frame' + (isLoaded ? ' is-loaded' : '')}>
-              {!isLoaded && <div className="registration-modal__loader" aria-live="polite"><span className="registration-modal__spinner" /><strong>CONNECTING TO REGISTRATION</strong><small>Preparing your entry form...</small></div>}
-              <iframe title="Code Relay registration form" src={REGISTRATION_URL} onLoad={() => setIsLoaded(true)} />
+            <div className="registration-modal__frame">
+              <div className="registration-modal__loader" aria-live="polite"><span className="registration-modal__spinner" /><strong>CONNECTING TO REGISTRATION</strong><small>Taking you to the entry form...</small></div>
             </div>
-            <a className="registration-modal__fallback" href={REGISTRATION_URL} target="_blank" rel="noopener noreferrer">Open form in a new tab <ExternalLink size={13} /></a>
           </div>
         </div>
       )}
