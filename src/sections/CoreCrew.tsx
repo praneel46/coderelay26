@@ -82,7 +82,7 @@ export const CoreCrew: React.FC = () => {
           ))}
         </nav>
 
-        <div ref={streamRef} className={'crew-stream' + (isMarquee ? ' crew-stream--marquee-shell' : ' crew-stream--static') + (isMarquee && focusedId ? ' crew-stream--focused' : '')}>
+        <div ref={streamRef} className={'crew-stream crew-stream--' + activeCategory + (isMarquee ? ' crew-stream--marquee-shell' : ' crew-stream--static') + (isMarquee && focusedId ? ' crew-stream--focused' : '')}>
           {isMarquee && <div className="crew-stream__controls" aria-label="All crew navigation">
             <button type="button" onClick={() => handleNudge(-1)} aria-label="Show previous crew members"><ChevronLeft size={13} /></button>
             <button type="button" onClick={() => handleNudge(1)} aria-label="Show next crew members"><ChevronRight size={13} /></button>

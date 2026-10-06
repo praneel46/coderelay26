@@ -656,6 +656,16 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .crew-stream__controls button:hover, .crew-stream__controls button:focus-visible { background:#cce43a; color:#111319; outline:none; }
 @media (max-width:760px) { .crew-track--marquee { animation-duration:24s; }.crew-card { flex-basis:min(65vw,240px); min-height:290px; }.crew-card__portrait { height:170px; }.crew-stream__controls { top:5px; right:5px; }.crew-stream--static .crew-track__group { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }.crew-stream--static .crew-card { min-width:0; min-height:235px; padding:7px; }.crew-stream--static .crew-card__portrait { height:112px; }.crew-stream--static .crew-card__details { padding-top:11px; gap:4px; }.crew-stream--static .crew-card__details strong { font-size:11px; white-space:normal; line-height:1.1; }.crew-stream--static .crew-card__topline { min-height:24px; padding-bottom:7px; font-size:7px; letter-spacing:.08em; }.crew-stream--static .crew-card__linkedin { width:20px; height:20px; } }
 
+/* Core Leads keeps the compact mobile card proportions at laptop widths. */
+.core-crew { scroll-margin-top:110px; }
+.crew-stream--leads { width:min(100%,520px); margin-inline:auto; }
+.crew-stream--leads .crew-track { width:100%; }
+.crew-stream--leads .crew-track__group { display:grid; width:100%; grid-template-columns:repeat(2,minmax(0,240px)); justify-content:center; gap:12px; padding-right:0; }
+.crew-stream--leads .crew-card { width:100%; min-width:0; min-height:290px; }
+.crew-stream--leads .crew-card__portrait { height:170px; }
+.crew-stream--leads .crew-card__image { object-position:center 40%; }
+@media (max-width:760px) { .crew-stream--leads { width:100%; }.crew-stream--leads .crew-track__group { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }.crew-stream--leads .crew-card { min-height:235px; padding:7px; }.crew-stream--leads .crew-card__portrait { height:112px; }.crew-stream--leads .crew-card__details { padding-top:11px; gap:4px; }.crew-stream--leads .crew-card__details strong { font-size:11px; white-space:normal; line-height:1.1; }.crew-stream--leads .crew-card__topline { min-height:24px; padding-bottom:7px; font-size:7px; letter-spacing:.08em; }.crew-stream--leads .crew-card__linkedin { width:20px; height:20px; } }
+
 /* Registration form handoff dialog. The iframe begins loading immediately while the loader stays visible. */
 .site-header__register, .network-hero__primary, .registration-cta__button { appearance:none; cursor:pointer; }
 .registration-modal { position:fixed; inset:0; z-index:100; display:grid; place-items:center; padding:clamp(12px,3vw,32px); color:#f1eee6; }
@@ -691,3 +701,334 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .registration-modal__fallback:hover { color:#cce43a; }
 @media (max-width:600px) { .registration-modal { padding:10px; }.registration-modal__panel { max-height:94vh; border-radius:6px; }.registration-modal__header { padding:15px 14px 13px; }.registration-modal__frame, .registration-modal__frame iframe { min-height:72vh; height:72vh; }.registration-modal__fallback { min-height:38px; font-size:9px; } }
 @media (prefers-reduced-motion:reduce) { .registration-modal__panel, .registration-modal__spinner, .registration-modal__loader::before, .registration-modal__loader-core::before, .registration-modal__loader-core::after, .registration-modal__dots { animation:none; } }
+
+/* Seamless Dark Theme Header with Exact 25 Years Jubilee & Golden VIGYANTRA 2026 Logos */
+.site-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 50;
+  width: 100%;
+  min-height: 72px;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0;
+  background: rgba(6, 9, 17, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+  transition: min-height 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.site-header--scrolled {
+  min-height: 64px;
+  background: rgba(5, 7, 14, 0.96);
+  border-bottom-color: rgba(34, 211, 238, 0.16);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65);
+}
+
+.site-header__inner {
+  width: 100%;
+  max-width: 1400px;
+  min-height: 72px;
+  margin: 0 auto;
+  padding: 8px clamp(12px, 3vw, 36px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  transition: min-height 0.3s ease, padding 0.3s ease;
+}
+
+.site-header--scrolled .site-header__inner {
+  min-height: 64px;
+  padding-block: 6px;
+}
+
+.site-brand {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1.8vw, 20px);
+  text-decoration: none;
+  min-width: 0;
+  flex: 0 1 auto;
+}
+
+.site-brand__jubilee {
+  display: block;
+  flex: 0 0 auto;
+  width: auto;
+  height: clamp(44px, 4.8vw, 62px);
+  max-width: clamp(48px, 5.2vw, 68px);
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+  border-radius: 0;
+  transition: height 0.3s ease;
+}
+
+.site-brand__divider {
+  width: 1px;
+  height: clamp(30px, 3.8vw, 44px);
+  flex: 0 0 1px;
+  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: height 0.3s ease;
+}
+
+.site-brand__vigyantra {
+  display: block;
+  flex: 0 1 auto;
+  width: auto;
+  max-width: clamp(160px, 28vw, 340px);
+  height: clamp(34px, 4.5vw, 54px);
+  object-fit: contain;
+  filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.5));
+  transition: height 0.3s ease;
+}
+
+.site-header--scrolled .site-brand__jubilee {
+  height: clamp(38px, 4.2vw, 54px);
+}
+
+.site-header--scrolled .site-brand__vigyantra {
+  height: clamp(30px, 4vw, 46px);
+}
+
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 1.2vw, 14px);
+  flex: 0 0 auto;
+}
+
+.site-header__register-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 38px;
+  padding: 0 clamp(12px, 1.6vw, 20px);
+  border: 1px solid rgba(34, 211, 238, 0.35);
+  border-radius: 8px;
+  background: rgba(34, 211, 238, 0.08);
+  color: #22d3ee;
+  font-family: var(--font-mono), "JetBrains Mono", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 0 14px rgba(34, 211, 238, 0.12);
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.site-header__register-btn:hover,
+.site-header__register-btn:focus-visible {
+  background: #22d3ee;
+  color: #04060c;
+  border-color: #22d3ee;
+  box-shadow: 0 0 24px rgba(34, 211, 238, 0.45);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.site-menu-trigger {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.site-menu-trigger:hover,
+.site-menu-trigger:focus-visible {
+  border-color: #22d3ee;
+  color: #22d3ee;
+  background: rgba(34, 211, 238, 0.08);
+  outline: none;
+}
+
+.site-menu-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: clamp(12px, 3vw, 36px);
+  z-index: 55;
+  display: flex;
+  flex-direction: column;
+  min-width: 220px;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  background: rgba(8, 11, 20, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(34, 211, 238, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.site-menu-panel.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.site-menu-panel button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #e2e8f0;
+  font-family: var(--font-body), sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.site-menu-panel button span {
+  color: #22d3ee;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.site-menu-panel button:hover,
+.site-menu-panel button:focus-visible {
+  background: rgba(34, 211, 238, 0.1);
+  color: #22d3ee;
+  outline: none;
+}
+
+.network-hero__content {
+  padding-top: clamp(86px, 11vh, 120px);
+}
+
+@media (max-width: 768px) {
+  .site-header {
+    min-height: 64px;
+  }
+  .site-header--scrolled {
+    min-height: 58px;
+  }
+  .site-header__inner {
+    min-height: 64px;
+    padding: 6px 14px;
+    gap: 10px;
+  }
+  .site-header--scrolled .site-header__inner {
+    min-height: 58px;
+  }
+  .site-brand {
+    gap: 8px;
+  }
+  .site-brand__jubilee {
+    height: 44px;
+  }
+  .site-brand__divider {
+    height: 32px;
+  }
+  .site-brand__vigyantra {
+    max-width: clamp(140px, 42vw, 220px);
+    height: 36px;
+  }
+  .site-header--scrolled .site-brand__jubilee {
+    height: 38px;
+  }
+  .site-header--scrolled .site-brand__vigyantra {
+    height: 32px;
+  }
+  .site-header__register-btn {
+    min-height: 34px;
+    padding: 0 10px;
+    font-size: 10px;
+  }
+  .site-menu-trigger {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header {
+    min-height: 60px;
+  }
+  .site-header--scrolled {
+    min-height: 54px;
+  }
+  .site-header__inner {
+    min-height: 60px;
+    padding: 5px 10px;
+    gap: 8px;
+  }
+  .site-header--scrolled .site-header__inner {
+    min-height: 54px;
+  }
+  .site-brand {
+    gap: 7px;
+  }
+  .site-brand__jubilee {
+    height: 40px;
+  }
+  .site-brand__divider {
+    height: 28px;
+  }
+  .site-brand__vigyantra {
+    max-width: clamp(120px, 40vw, 175px);
+    height: 32px;
+  }
+  .site-header--scrolled .site-brand__jubilee {
+    height: 34px;
+  }
+  .site-header--scrolled .site-brand__vigyantra {
+    height: 28px;
+  }
+  .site-header__register-btn span {
+    display: none;
+  }
+  .site-header__register-btn {
+    min-height: 32px;
+    width: 32px;
+    padding: 0;
+  }
+  .site-menu-trigger {
+    width: 34px;
+    height: 34px;
+  }
+  .site-menu-panel {
+    right: 10px;
+    min-width: 190px;
+  }
+  .network-hero__content {
+    padding-top: 76px;
+  }
+}
+
+@media (max-width: 360px) {
+  .site-brand__jubilee {
+    height: 34px;
+  }
+  .site-brand__divider {
+    height: 24px;
+  }
+  .site-brand__vigyantra {
+    max-width: 110px;
+    height: 28px;
+  }
+}
+
