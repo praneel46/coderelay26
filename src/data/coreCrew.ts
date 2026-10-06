@@ -27,8 +27,8 @@ const LINKEDIN = {
 };
 
 export const CORE_LEADS: CrewMember[] = [
-  { id: 'lead-praneel', category: 'leads', role: 'EVENT COORDINATOR', name: 'PRANEEL KULKARNI', secondary: '8660276040', phone: '8660276040', image: '/crew/praneel.jpeg', linkedin: LINKEDIN.praneel },
-  { id: 'lead-open', category: 'leads', role: 'EVENT COORDINATOR', name: '', secondary: '' },
+  { id: 'lead-praneel', category: 'leads', role: 'CORE LEAD', name: 'PRANEEL KULKARNI', secondary: '8660276040', phone: '8660276040', image: '/crew/praneel.jpeg', linkedin: LINKEDIN.praneel },
+  { id: 'lead-open', category: 'leads', role: 'CORE LEAD', name: '', secondary: '' },
 ];
 
 export const ALL_CREW: CrewMember[] = [
@@ -38,16 +38,16 @@ export const ALL_CREW: CrewMember[] = [
   { id: 'crew-hemanth', category: 'all', role: 'CORE CREW', name: 'HEMANTH U', secondary: 'TECH & DEV', image: '/crew/hemanth.png', linkedin: LINKEDIN.hemanth },
   { id: 'crew-deekshitha', category: 'all', role: 'CORE CREW', name: 'DEEKSHITHA J A', secondary: 'CORE CREW', image: '/crew/deekshitha.jpeg', linkedin: LINKEDIN.deekshitha },
   { id: 'crew-sumedha', category: 'all', role: 'CORE CREW', name: 'SUMEDHA BHAT', secondary: 'CORE CREW', image: '/crew/sumedha.png', linkedin: LINKEDIN.sumedha },
-  { id: 'crew-praneel', category: 'all', role: 'CORE CREW', name: 'PRANEEL KULKARNI', secondary: 'EVENT COORDINATOR', image: '/crew/praneel.jpeg', linkedin: LINKEDIN.praneel },
-  { id: 'crew-sushanth', category: 'all', role: 'CORE CREW', name: 'SUSHANTH N S', secondary: 'CORE CREW', image: '/crew/sushanth.jpeg', linkedin: LINKEDIN.swati },
+  { id: 'crew-praneel', category: 'all', role: 'LEAD COORDINATOR', name: 'PRANEEL KULKARNI', secondary: 'LEAD COORDINATOR', image: '/crew/praneel.jpeg', linkedin: LINKEDIN.praneel },
+  { id: 'crew-sushanth', category: 'all', role: 'CORE CREW', name: 'SUSHANTH N S', secondary: 'TECH & DEV', image: '/crew/sushanth.jpeg', linkedin: LINKEDIN.swati },
 ];
 
 export const TECH_AND_DEV: CrewMember[] = [
-  { ...ALL_CREW[6], id: 'tech-praneel', category: 'tech', role: 'TECH & DEV' },
-  { ...ALL_CREW[0], id: 'tech-keshav', category: 'tech', role: 'TECH & DEV' },
-  { ...ALL_CREW[3], id: 'tech-hemanth', category: 'tech', role: 'TECH & DEV' },
-  { ...ALL_CREW[7], id: 'tech-sushanth', category: 'tech', role: 'TECH & DEV' },
-  { ...ALL_CREW[2], id: 'tech-swati', category: 'tech', role: 'TECH & DEV' },
+  { ...ALL_CREW[6], id: 'tech-praneel', category: 'tech', role: 'TECH & DEV', secondary: 'TECH & DEV' },
+  { ...ALL_CREW[0], id: 'tech-keshav', category: 'tech', role: 'TECH & DEV', secondary: 'TECH & DEV' },
+  { ...ALL_CREW[3], id: 'tech-hemanth', category: 'tech', role: 'TECH & DEV', secondary: 'TECH & DEV' },
+  { ...ALL_CREW[7], id: 'tech-sushanth', category: 'tech', role: 'TECH & DEV', secondary: 'TECH & DEV' },
+  { ...ALL_CREW[2], id: 'tech-swati', category: 'tech', role: 'TECH & DEV', secondary: 'TECH & DEV' },
 ];
 
 export const FACULTY_COMMITTEE: CrewMember[] = [
