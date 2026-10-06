@@ -594,9 +594,10 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .crew-card__linkedin { display:inline-flex; align-items:center; justify-content:center; justify-self:center; width:24px; height:24px; border:1px solid rgba(204,228,58,.35); border-radius:3px; color:#cce43a; transition:background .2s ease,color .2s ease,transform .2s ease; }
 .crew-card__linkedin:hover, .crew-card__linkedin:focus-visible { background:#cce43a; color:#111319; transform:translateY(-1px); }
 .crew-card__phone { display:inline-flex; align-items:center; justify-content:center; gap:4px; color:inherit; text-decoration:none; }
-.crew-stream__controls { position:absolute; z-index:5; top:7px; right:7px; display:flex; gap:4px; }
-.crew-stream__controls button { display:grid; place-items:center; width:24px; height:24px; padding:0; border:1px solid rgba(204,228,58,.42); border-radius:3px; background:rgba(25,27,37,.92); color:#cce43a; cursor:pointer; }
-.crew-stream__controls button:hover, .crew-stream__controls button:focus-visible { background:#cce43a; color:#111319; outline:none; }
+.crew-stream-wrapper { position:relative; width:100%; }
+.crew-stream__controls { position:absolute; z-index:20; top:8px; right:8px; display:flex; gap:6px; pointer-events:auto; }
+.crew-stream__controls button { display:grid; place-items:center; width:28px; height:28px; padding:0; border:1px solid rgba(204,228,58,.45); border-radius:6px; background:rgba(15,18,28,.95); color:#cce43a; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,.5); transition:background .2s ease,color .2s ease,border-color .2s ease,transform .15s ease; }
+.crew-stream__controls button:hover, .crew-stream__controls button:focus-visible { background:#cce43a; color:#0b0e14; border-color:#cce43a; transform:scale(1.05); outline:none; }
 @media (max-width:760px) { .crew-track--marquee { animation-duration:24s; }.crew-card { flex-basis:min(65vw,240px); min-height:290px; }.crew-card__portrait { height:170px; }.crew-stream__controls { top:5px; right:5px; }.crew-stream--static .crew-track__group { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }.crew-stream--static .crew-card { min-width:0; min-height:235px; padding:7px; }.crew-stream--static .crew-card__portrait { height:112px; }.crew-stream--static .crew-card__details { padding-top:11px; gap:4px; }.crew-stream--static .crew-card__details strong { font-size:11px; white-space:normal; line-height:1.1; }.crew-stream--static .crew-card__topline { min-height:24px; padding-bottom:7px; font-size:7px; letter-spacing:.08em; }.crew-stream--static .crew-card__linkedin { width:20px; height:20px; } }
 
 /* Core Leads keeps the compact mobile card proportions at laptop widths. */

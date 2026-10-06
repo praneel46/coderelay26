@@ -82,23 +82,28 @@ export const CoreCrew: React.FC = () => {
           ))}
         </nav>
 
-        <div ref={streamRef} className={'crew-stream crew-stream--' + activeCategory + (isMarquee ? ' crew-stream--marquee-shell' : ' crew-stream--static') + (isMarquee && focusedId ? ' crew-stream--focused' : '')}>
-          {isMarquee && <div className="crew-stream__controls" aria-label="All crew navigation">
-            <button type="button" onClick={() => handleNudge(-1)} aria-label="Show previous crew members"><ChevronLeft size={13} /></button>
-            <button type="button" onClick={() => handleNudge(1)} aria-label="Show next crew members"><ChevronRight size={13} /></button>
-          </div>}
-          {visibleMembers.length > 0 ? (
-            <div className={'crew-track' + (isMarquee ? ' crew-track--marquee' : '')} style={isMarquee ? { animationDirection: marqueeDirection === -1 ? 'reverse' : 'normal' } : undefined}>
-              <div className="crew-track__group">
-                {visibleMembers.map((member) => <CrewCard key={member.id} member={member} focused={focusedId === member.id} scanOnFocus={scanOnFocus} onFocus={setFocusedId} onLeave={() => setFocusedId(null)} />)}
-              </div>
-              {isMarquee && <div className="crew-track__group" aria-hidden="true">
-                {visibleMembers.map((member) => <CrewCard key={`${member.id}-duplicate`} member={member} duplicate focused={false} scanOnFocus={false} onFocus={setFocusedId} onLeave={() => setFocusedId(null)} />)}
-              </div>}
+        <div className="crew-stream-wrapper">
+          {isMarquee && (
+            <div className="crew-stream__controls" aria-label="All crew navigation">
+              <button type="button" onClick={() => handleNudge(-1)} aria-label="Show previous crew members"><ChevronLeft size={14} /></button>
+              <button type="button" onClick={() => handleNudge(1)} aria-label="Show next crew members"><ChevronRight size={14} /></button>
             </div>
-          ) : (
-            <div className="crew-empty"><span>CHANNEL RESERVED</span><strong>PERSONNEL DATA PENDING</strong></div>
           )}
+
+          <div ref={streamRef} className={'crew-stream crew-stream--' + activeCategory + (isMarquee ? ' crew-stream--marquee-shell' : ' crew-stream--static') + (isMarquee && focusedId ? ' crew-stream--focused' : '')}>
+            {visibleMembers.length > 0 ? (
+              <div className={'crew-track' + (isMarquee ? ' crew-track--marquee' : '')} style={isMarquee ? { animationDirection: marqueeDirection === -1 ? 'reverse' : 'normal' } : undefined}>
+                <div className="crew-track__group">
+                  {visibleMembers.map((member) => <CrewCard key={member.id} member={member} focused={focusedId === member.id} scanOnFocus={scanOnFocus} onFocus={setFocusedId} onLeave={() => setFocusedId(null)} />)}
+                </div>
+                {isMarquee && <div className="crew-track__group" aria-hidden="true">
+                  {visibleMembers.map((member) => <CrewCard key={`${member.id}-duplicate`} member={member} duplicate focused={false} scanOnFocus={false} onFocus={setFocusedId} onLeave={() => setFocusedId(null)} />)}
+                </div>}
+              </div>
+            ) : (
+              <div className="crew-empty"><span>CHANNEL RESERVED</span><strong>PERSONNEL DATA PENDING</strong></div>
+            )}
+          </div>
         </div>
       </div>
     </section>
