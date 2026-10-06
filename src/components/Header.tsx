@@ -52,16 +52,16 @@ export const Header: React.FC = () => {
             className="site-brand__jubilee"
             src={silverJubileeLogo}
             alt="SJB Institute of Technology Silver Jubilee 25 Years"
-            width={72}
-            height={72}
+            width={60}
+            height={60}
           />
           <span className="site-brand__divider" aria-hidden="true" />
           <img
             className="site-brand__vigyantra"
             src={vigyantraLogo}
             alt="Vigyantra 2026"
-            width={360}
-            height={100}
+            width={240}
+            height={80}
           />
         </a>
 
