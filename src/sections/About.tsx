@@ -65,7 +65,7 @@ export const About: React.FC = () => {
 
             <div className="relative pt-4 sm:pt-6 border-t border-white/[0.08]">
               <p className="font-body text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
-                Code Relay is a team-based programming challenge where three members combine technical knowledge, logical thinking, debugging ability and problem-solving skills to progress through multiple challenges.
+                Code Relay is a team-based programming challenge where four members combine technical knowledge, logical thinking, debugging ability and problem-solving skills to progress through multiple challenges.
               </p>
             </div>
 

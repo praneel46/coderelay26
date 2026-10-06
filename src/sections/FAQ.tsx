@@ -14,7 +14,7 @@ const FAQS: FAQItem[] = [
     id: 'faq-01',
     number: '01',
     question: 'How many members can be in a team?',
-    answer: 'Each team must strictly comprise exactly 3 members.',
+    answer: 'Each team must strictly comprise exactly 4 members.',
   },
   {
     id: 'faq-02',

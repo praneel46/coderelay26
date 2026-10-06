@@ -161,10 +161,10 @@ export const Footer: React.FC = () => {
           {/* Left: Copyright & Institution */}
           <div className="flex flex-col space-y-0.5">
             <p className="font-mono text-xs text-slate-300">
-              © 2026 VIGYANTRA 2026 — CODE RELAY
+              © 2026 VIGYANTRA · CODE RELAY. ALL RIGHTS RESERVED.
             </p>
             <p className="font-mono text-[10px] text-slate-500">
-              SJB Institute of Technology • CSE Technical Council
+              SJB Institute of Technology, Bengaluru
             </p>
           </div>
 

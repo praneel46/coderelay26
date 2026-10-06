@@ -15,7 +15,7 @@ const RULES: RuleItem[] = [
     number: '01',
     title: 'ELIGIBILITY & TEAM FORMATION',
     content:
-      'Each team must strictly comprise exactly three (3) bonafide undergraduate or postgraduate students. Cross-college combinations are fully recognized and permitted.',
+      'Each team must strictly comprise exactly four (4) bonafide undergraduate or postgraduate students. Cross-college combinations are fully recognized and permitted.',
   },
   {
     id: 'rule-02',
@@ -29,7 +29,7 @@ const RULES: RuleItem[] = [
     number: '03',
     title: 'REPORTING & CONDUCT',
     content:
-      'Teams must report to the SJBIT CSE Apex Lab by 08:30 AM IST. Professional decorum and strict compliance with proctors are mandatory at all times.',
+      'Teams must report to the SJBIT Apex Lab by 08:30 AM IST. Professional decorum and strict compliance with proctors are mandatory at all times.',
   },
   {
     id: 'rule-04',

@@ -35,7 +35,7 @@ const ROUNDS: RoundItem[] = [
     title: 'RELAY FINALE',
     stage: 'CHAMPIONSHIP',
     description:
-      'Live continuous digital handover battle where 3 coders pass dynamic active sessions in rapid baton relays.',
+      'Live continuous digital handover battle where 4 coders pass dynamic active sessions in rapid baton relays.',
   },
 ];
 
