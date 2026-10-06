@@ -32,14 +32,14 @@ export const CORE_LEADS: CrewMember[] = [
 ];
 
 export const ALL_CREW: CrewMember[] = [
-  { id: 'crew-keshav', category: 'all', role: 'CORE CREW', name: 'KESHAV SAVANTH S', secondary: 'TECH & DEV', image: '/crew/keshav.png', linkedin: LINKEDIN.praneel },
-  { id: 'crew-chaya', category: 'all', role: 'CORE CREW', name: 'CHAYA R', secondary: 'CORE CREW', image: '/crew/chaya.png' },
-  { id: 'crew-swati', category: 'all', role: 'CORE CREW', name: 'SWATI SHRIDHAR HEGDE', secondary: 'TECH & DEV', image: '/crew/swati.jpeg', linkedin: LINKEDIN.swati },
-  { id: 'crew-hemanth', category: 'all', role: 'CORE CREW', name: 'HEMANTH U', secondary: 'TECH & DEV', image: '/crew/hemanth.png', linkedin: LINKEDIN.hemanth },
-  { id: 'crew-deekshitha', category: 'all', role: 'CORE CREW', name: 'DEEKSHITHA J A', secondary: 'CORE CREW', image: '/crew/deekshitha.jpeg', linkedin: LINKEDIN.deekshitha },
-  { id: 'crew-sumedha', category: 'all', role: 'CORE CREW', name: 'SUMEDHA BHAT', secondary: 'CORE CREW', image: '/crew/sumedha.png', linkedin: LINKEDIN.sumedha },
+  { id: 'crew-keshav', category: 'all', role: 'COORDINATOR', name: 'KESHAV SAVANTH S', secondary: 'TECH & DEV', image: '/crew/keshav.png', linkedin: LINKEDIN.praneel },
+  { id: 'crew-chaya', category: 'all', role: 'COORDINATOR', name: 'CHAYA R', secondary: 'COORDINATOR', image: '/crew/chaya.png' },
+  { id: 'crew-swati', category: 'all', role: 'COORDINATOR', name: 'SWATI SHRIDHAR HEGDE', secondary: 'TECH & DEV', image: '/crew/swati.jpeg', linkedin: LINKEDIN.swati },
+  { id: 'crew-hemanth', category: 'all', role: 'COORDINATOR', name: 'HEMANTH U', secondary: 'TECH & DEV', image: '/crew/hemanth.png', linkedin: LINKEDIN.hemanth },
+  { id: 'crew-deekshitha', category: 'all', role: 'COORDINATOR', name: 'DEEKSHITHA J A', secondary: 'COORDINATOR', image: '/crew/deekshitha.jpeg', linkedin: LINKEDIN.deekshitha },
+  { id: 'crew-sumedha', category: 'all', role: 'COORDINATOR', name: 'SUMEDHA BHAT', secondary: 'COORDINATOR', image: '/crew/sumedha.png', linkedin: LINKEDIN.sumedha },
   { id: 'crew-praneel', category: 'all', role: 'LEAD COORDINATOR', name: 'PRANEEL KULKARNI', secondary: 'LEAD COORDINATOR', image: '/crew/praneel.jpeg', linkedin: LINKEDIN.praneel },
-  { id: 'crew-sushanth', category: 'all', role: 'CORE CREW', name: 'SUSHANTH N S', secondary: 'TECH & DEV', image: '/crew/sushanth.jpeg', linkedin: LINKEDIN.swati },
+  { id: 'crew-sushanth', category: 'all', role: 'COORDINATOR', name: 'SUSHANTH N S', secondary: 'TECH & DEV', image: '/crew/sushanth.jpeg', linkedin: LINKEDIN.swati },
 ];
 
 export const TECH_AND_DEV: CrewMember[] = [
